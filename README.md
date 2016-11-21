@@ -47,37 +47,41 @@ npm install
 Currently it's just a tool which copy some files (with a bit of templating) to enable you start a SPA project without a framework, but just a small setup of libs and best practices.
 
 ## Generators
-* app: main generator, launched with `yo ddiy`   
-* components: add a component to the app with `yo ddiy:components [component_name]`
+* app: build the base app, launched with `yo ddiy`   
+* components: add a component to the app with `yo ddiy:components [name]`
 
 ### App
-TODO: detailed feature of that generator
-* #### appName
-    Type: `String`  
-    Default: name of parent folder (the one in which you've run `yo ddiy`)
-    Description: id of the app, it should only contains alphanum chars and hyphens
-* #### appTitle
-    Type: `String`  
-    Default: name of parent folder (the one in which you've run `yo ddiy`)
-    Description: Title of the app displayed for the users
-* #### rootTag
-    Type: `String`  
-    Default: `body`
-    Description: the root html tag of the app (body for full SPA)
-* #### localServerPort
-    Type: `String`  
-    Default: `9010`
-    Description: the port used by local server
+Build the base structure of the app
+TODO: display tree structure here
+
+##### Parameters 
+Params are asked when running `yo ddiy`
+
+* **appName** _(`String`, default: name of parent folder (the one in which you've run `yo ddiy`)_  
+	Id of the app, it should only contains alphanum chars and hyphens
+
+* **appTitle** _(`String`, default: name of parent folder (the one in which you've run `yo ddiy`)_  
+	Title of the app, that should be displayed to the users
+* **rootTag** _(`String`, default: `body`)_  
+	The root html tag of the app (body for full SPA)
+* **localServerPort** _(`Number`, default: `9010`)_  
+	The port used by local server
 
 ### Components
-TODO: detailed feature of that generator
+Create a component defined by a `[name].js`, a `_[name].scss` and a `[name].hbs` written to work together
+
+##### Parameters
+Params are passed as arguments when running `yo ddiy:components [name]`
+
+* **name** _(`String`)_  
+	Name of the component (only alphanum characters and hyphen).
 
 ## Configuration
 Constants are defined in generators/conf.js and are used by all the generators
 
 
 
-The name of your app, you can change it later in work/app/scripts/constants.js
+
 
 ## Contributing
 If you'd like to contribute, please fork the repository and use a feature
