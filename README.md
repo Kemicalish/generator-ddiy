@@ -39,8 +39,9 @@ Want to develop on top of it?
 git clone https://github.com/Kemicalish/generator-ddiy
 cd generator-ddiy
 npm install
+npm link 
 ```
-
+`npm link` enable yeoman to find this generator
 
 ## Features
 
