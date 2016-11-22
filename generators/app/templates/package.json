@@ -70,5 +70,18 @@
     "request": "^2.75.0",
     "scrollmonitor": "^1.1.2",
     "crossroads": "^0.12.2"
+  },
+  "eslintConfig": {
+    "env":{
+      "es6": true,
+      "node": true,
+      "browser": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
   }
 }

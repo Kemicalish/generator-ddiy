@@ -1,18 +1,21 @@
 'use strict';
 var _ = require('lodash');
+var mkdirp = require('mkdirp');
 
 const generators = require('yeoman-generator');
-const conf       = require('../conf.js');
+const conf = require('../conf.js');
 
 var _constants = conf.app;
 var ignore_files = [
     'node_modules',
-    'dev', 
-    'staging', 
+    'dev',
+    'staging',
     'production',
     'dist',
     'build'
 ];
+
+var _g = null;
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -21,8 +24,13 @@ module.exports = generators.Base.extend({
         generators.Base.apply(this, arguments);
     },
 
+    initializing: function () {
+        _g = this;
+        this.pkg = require('../../package.json');
+    },
+
     prompting: function () {
-        if(! _constants.promptInstall)
+        if (!_constants.promptInstall)
             return;
 
         return this.prompt([{
@@ -56,68 +64,78 @@ module.exports = generators.Base.extend({
             default: true,
             store: true
         }]).then(function (answers) {
+            _constants.date = (new Date).toISOString().split('T')[0];
+            _constants.pkg_name = this.pkg.name;
+            _constants.pkg_version = this.pkg.version;
+
             _constants.appName = _.camelCase(answers.appname);
             _constants.rootTag = answers.rootTag;
             _constants.appTitle = answers.appTitle;
             _constants.localServerPort = answers.localServerPort;
             _constants.launchServer = answers.launchServer;
+
             let settingsHTML = _.chain(_constants)
-                                    .toPairs()
-                                    .map(c => `<dt>${c[0]}</dt><dd>${c[1]}<dd>`)
-                                    .value()
-                                    .join('')
+                .toPairs()
+                .map(c => `<dt>${c[0]}</dt><dd>${c[1]}<dd>`)
+                .value()
+                .join('')
             _constants.defaultBodyContent = `<div>${answers.appTitle} is up!</div>
             <div><dl>${settingsHTML}</dl></div>`;
+
+
         }.bind(this));
     },
-    writing: function () {
-        this.fs.copy(
-            this.templatePath(`${conf.APP_DIRNAME}/**/*`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}`)
-        );
-        this.fs.copy(
-            this.templatePath(`${conf.TASK_DIRNAME}/**/*`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}`)
-        );
-        this.fs.copy(
-            this.templatePath('package.json'),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/package.json`)
-        );
-        this.fs.copyTpl(
-            this.templatePath(`${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`),
+    writing: {
+        appDir: () => _g.fs.copy(
+            _g.templatePath(`${conf.APP_DIRNAME}/**/*`),
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}`)
+        ),
+        taskDir: () => _g.fs.copy(
+            _g.templatePath(`${conf.TASK_DIRNAME}/**/*`),
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}`)
+        ),
+        packageJSON: () => _g.fs.copy(
+            _g.templatePath('package.json'),
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/package.json`)
+        ),
+        constants: () => _g.fs.copyTpl(
+            _g.templatePath(`${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`),
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`),
             _constants
-        );
-        this.fs.copyTpl(
-            this.templatePath(`${conf.APP_DIRNAME}/index.html`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/index.html`),
+        ),
+        indexHTML: () => _g.fs.copyTpl(
+            _g.templatePath(`${conf.APP_DIRNAME}/index.html`),
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/index.html`),
             _constants
-        );
-        this.fs.copyTpl(
-            this.templatePath(`${conf.TASK_FILNAME}`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_FILNAME}`),
+        ),
+        gulpfile: () => _g.fs.copyTpl(
+            _g.templatePath(`${conf.TASK_FILNAME}`),
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_FILNAME}`),
             _constants
-        );
-        this.fs.copyTpl(
-            this.templatePath(`${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`),
+        ),
+        gulpConfig: () => _g.fs.copyTpl(
+            _g.templatePath(`${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`),
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`),
             _constants
-        );
-        this.fs.write(
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/.gitignore`),
+        ),
+        gitignore: () => _g.fs.write(
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/.gitignore`),
             ignore_files.join("\n")
-        );
+        ),
+        templatesDir: () => mkdirp(_g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.TEMPLATES_DIRNAME}`), function (err) {
+
+        }),
     },
     install: function () {
         let that = this;
-        let execDir = `${conf.WORKSPACE_DIRNAME}`; 
-        this.spawnCommand('npm', ['install'],{
-            cwd:execDir
-        }).on('close', ()=>{
+        let execDir = `${conf.WORKSPACE_DIRNAME}`;
+        this.spawnCommand('npm', ['install'], {
+            cwd: execDir
+        }).on('close', () => {
             that.log('_constants.launchServer', _constants.launchServer);
-            if(_constants.launchServer)
-                this.spawnCommand(conf.TASK_RUNNER, [conf.RUN_SERVER_TASK],{
-                    cwd:execDir
+            if (_constants.launchServer)
+                this.spawnCommand(conf.TASK_RUNNER, [conf.RUN_SERVER_TASK], {
+                    cwd: execDir
                 });
         });
     }
