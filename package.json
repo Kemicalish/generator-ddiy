@@ -26,12 +26,16 @@
     "generators/app",
     "generators/components"
   ],
+  "peerDependencies": {
+    "yo": ">=1.7.1"
+  },
   "dependencies": {
     "lodash": "^4.17.2",
     "mocha": "^3.1.2",
     "yeoman-generator": "^0.24.1"
   },
   "devDependencies": {
+    "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.5.1"
   }
 }
