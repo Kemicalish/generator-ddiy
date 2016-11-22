@@ -5,6 +5,14 @@ const generators = require('yeoman-generator');
 const conf       = require('../conf.js');
 
 var _constants = conf.app;
+var ignore_files = [
+    'node_modules',
+    'dev', 
+    'staging', 
+    'production',
+    'dist',
+    'build'
+];
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -94,6 +102,10 @@ module.exports = generators.Base.extend({
             this.templatePath(`${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`),
             this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`),
             _constants
+        );
+        this.fs.write(
+            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/.gitignore`),
+            ignore_files.join("\n")
         );
     },
     install: function () {
