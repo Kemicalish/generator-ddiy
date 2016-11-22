@@ -15,18 +15,24 @@ var paths = {
             css: 'app/styles/*.scss' 
         }, 
         dest: { 
-            js: 'dist/scripts', 
-            constants: 'dist/', 
-            html: 'dist/', 
-            css: 'dist/styles',
-            images:'dist/images',
+            js: 'dev/scripts', 
+            constants: 'dev/', 
+            html: 'dev/', 
+            css: 'dev/styles',
+            images:'dev/images',
         } 
     },
     development: {
 
     },
     staging: {
-
+        dest: { 
+            js: 'staging/scripts', 
+            constants: 'staging/', 
+            html: 'staging/', 
+            css: 'staging/styles',
+            images:'staging/images',
+        } 
     },
     production: {
         dest: { 
@@ -90,7 +96,7 @@ var plugin = {
         js: {
             browserSync:{
                 port:<%= localServerPort %>,
-                baseDir:['dist', 'app']
+                baseDir:['dev', 'app']
             },
             browserify:{
                 debug:true,
@@ -111,7 +117,7 @@ var plugin = {
         js: {
             browserSync:{
                 port:<%= localServerPort %>,
-                baseDir:['dist', 'app']
+                baseDir:['staging']
             },
             browserify:{
                 debug:false,
@@ -128,7 +134,7 @@ var plugin = {
         js: {
             browserSync:{
                 port:<%= localServerPort %>,
-                baseDir:['build', 'app']
+                baseDir:['build']
             },
             browserify:{
                 debug:false,

@@ -8,8 +8,6 @@ const $ = gulpLoadPlugins();
 const babelify        = require('babelify');
 const buffer          = require('vinyl-buffer');
 const source          = require('vinyl-source-stream');
-const uglify          = require('gulp-uglify');
-const gulpif          = require('gulp-if');
 
 
 conf = require('./conf');
@@ -36,7 +34,7 @@ gulp.task('scripts', () => {
      .pipe(buffer())
      .pipe($.sourcemaps.init({loadMaps: true}))
      .pipe($.sourcemaps.write('.'))
-     .pipe(gulpif(conf.run.js.uglify, uglify()))
+     .pipe($.if(conf.run.js.uglify, $.uglify()))
      .pipe(gulp.dest(conf.paths.dest.js))
      .pipe(reload({stream: true}));
 });
