@@ -27,22 +27,8 @@ Your app root folder should be ready in the "work" dir.
 
 To launch it later, from the work directory just do:
 ```shell
-cd work
 gulp serve
 ```
-
-
-## Developing
-
-Want to develop on top of it?
-
-```shell
-git clone https://github.com/Kemicalish/generator-ddiy
-cd generator-ddiy
-npm install
-npm link 
-```
-`npm link` enables yeoman to find this generator
 
 ## Features
 
@@ -68,6 +54,19 @@ Params are asked when running `yo ddiy`
 	The root html tag of the app (body for full SPA)
 * **localServerPort** _(`Number`, default: `9010`)_  
 	The port used by local server
+
+### Components
+Create a component defined by a `[name].js`, a `_[name].scss` and a `[name].hbs` written to work together
+
+##### Parameters
+Params are passed as arguments when running `yo ddiy:components [name]`
+
+* **name** _(`String`)_  
+	Name of the component (only alphanum characters and hyphen).
+
+	
+## Configuration
+Constants are defined in generators/conf.js and are used by all the generators
 
 ## Gulp
 The gulp file is just loading the tasks present in `work/tasks` folder
@@ -95,18 +94,18 @@ gulp build --env=production
 ## Gulp Plugins
 Gulp plugins (the ones that begin with `gulp-`) don't have to be `require()`'d. They are automatically picked up by `gulp-load-plugins` and available through the `$` variable.
 
-### Components
-Create a component defined by a `[name].js`, a `_[name].scss` and a `[name].hbs` written to work together
 
-##### Parameters
-Params are passed as arguments when running `yo ddiy:components [name]`
+## Developing
 
-* **name** _(`String`)_  
-	Name of the component (only alphanum characters and hyphen).
+Want to develop on top of it?
 
-## Configuration
-Constants are defined in generators/conf.js and are used by all the generators
-
+```shell
+git clone https://github.com/Kemicalish/generator-ddiy
+cd generator-ddiy
+npm install
+npm link 
+```
+`npm link` enables yeoman to find this generator
 
 ## Contributing
 If you'd like to contribute, please fork the repository and use a feature
