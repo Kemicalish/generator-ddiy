@@ -53,3 +53,7 @@ gulp.task('serve', ['html', 'fonts'], () => {
   gulp.watch(conf.paths.src.scripts,    ['html']);
   gulp.watch(conf.paths.src.fonts,      ['fonts']);
 });
+
+gulp.task('build', ['html', 'fonts', 'images', 'fonts'], () => {
+    
+});
