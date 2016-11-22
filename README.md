@@ -8,9 +8,9 @@ It's useful if you wan't to build a project that will be maintain by a team whic
 
 ## Installing / Getting started
 
-If you not already have Yeoman, install it globally
+If you not already have Yeoman and gulp client, install them globally
 ```shell
-npm install -g yo
+npm install -g yo gulp-cli
 ```
 
 then install this generator
@@ -69,6 +69,32 @@ Params are asked when running `yo ddiy`
 * **localServerPort** _(`Number`, default: `9010`)_  
 	The port used by local server
 
+## Gulp
+The gulp file is just loading the tasks present in `work/tasks` folder
+All the config is centralized in `work/tasks/conf.js` 
+
+##### Task in the App Generator
+
+To start your app in the local web server, run:
+```shell
+gulp serve
+```
+
+To change the running env and match the config options just run:
+```shell
+gulp serve --env=[Your_ENV]
+```
+accepted values are `development`, `staging`, `production`
+For example all console.log are by default removed from production env
+
+To build the app for production, run:
+```shell
+gulp build --env=production
+```
+
+## Gulp Plugins
+Gulp plugins (the ones that begin with `gulp-`) don't have to be `require()`'d. They are automatically picked up by `gulp-load-plugins` and available through the `$` variable.
+
 ### Components
 Create a component defined by a `[name].js`, a `_[name].scss` and a `[name].hbs` written to work together
 
@@ -80,9 +106,6 @@ Params are passed as arguments when running `yo ddiy:components [name]`
 
 ## Configuration
 Constants are defined in generators/conf.js and are used by all the generators
-
-
-
 
 
 ## Contributing
