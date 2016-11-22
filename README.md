@@ -1,4 +1,4 @@
-[![Build Status](https://drone.io/github.com/Kemicalish/generator-ddiy/status.png)](https://drone.io/github.com/Kemicalish/generator-ddiy/latest)
+[![Build Status](https://travis-ci.org/Kemicalish/generator-ddiy.svg?branch=master)](https://travis-ci.org/Kemicalish/generator-ddiy)
 
 # Don't do it Yourself
 > Generator for Single Page Applications
