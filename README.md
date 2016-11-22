@@ -1,9 +1,10 @@
-[![Build Status](https://drone.io/bitbucket.org/potionofwit/ddiy/status.png)](https://drone.io/bitbucket.org/potionofwit/ddiy/latest)
+[![Build Status](https://drone.io/github.com/Kemicalish/generator-ddiy/status.png)](https://drone.io/github.com/Kemicalish/generator-ddiy/latest)
 
-# Don't do it Yourself base
-> Generator for generic SPAs
+# Don't do it Yourself
+> Generator for Single Page Applications
 
-Scaffold your SPA base project with this yeoman generator
+Scaffold your SPA base project with this yeoman generator. The main goal of this project is to allow building complex SPA without relying on a framework (only libs).
+It's useful if you wan't to build a project that will be maintain by a team which has no experience with your favorite framework. 
 
 ## Installing / Getting started
 
@@ -41,7 +42,7 @@ cd generator-ddiy
 npm install
 npm link 
 ```
-`npm link` enable yeoman to find this generator
+`npm link` enables yeoman to find this generator
 
 ## Features
 
