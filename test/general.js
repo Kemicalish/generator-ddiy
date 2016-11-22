@@ -2,7 +2,11 @@ const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 const scopeDir = '../generators/app';
-const workDir = 'work';
+const conf     = require('../generators/conf.js');
+
+const mainTaskFilename = 'main.js';
+const scriptsTaskFilename = 'scripts.js';
+const stylesTaskFilename = 'styles.js';
 
 describe('general', () => {
   before(function (done) {
@@ -21,30 +25,63 @@ describe('general', () => {
 
   it('creates expected app files', () => {
     assert.file([
-        `${workDir}/package.json`,
-        `${workDir}/.gitignore`,
-        `${workDir}/app`,
-        `${workDir}/app/scripts`,
-        `${workDir}/app/scripts/core`,
-        `${workDir}/app/scripts/core/device.js`,
-        `${workDir}/app/scripts/core/helpers.js`,
-        `${workDir}/app/scripts/core/log.js`,
-        `${workDir}/app/scripts/core/router.js`,
-        `${workDir}/app/scripts/constants.js`,
-        `${workDir}/app/scripts/main.js`,
-        `${workDir}/app/styles`,
-        `${workDir}/app/index.html`,
+        `${conf.WORKSPACE_DIRNAME}/package.json`,
+        `${conf.WORKSPACE_DIRNAME}/.gitignore`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/device.js`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/helpers.js`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/log.js`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/router.js`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/main.js`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.STYLES_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/index.html`,
     ]);
   });
 
   it('creates expected tasks files', () => {
     assert.file([
-        `${workDir}/gulpfile.js`,
-        `${workDir}/tasks`,
-        `${workDir}/tasks/conf.js`,
-        `${workDir}/tasks/main.js`,
-        `${workDir}/tasks/scripts.js`,
-        `${workDir}/tasks/styles.js`,
+        `${conf.WORKSPACE_DIRNAME}/gulpfile.js`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${mainTaskFilename}`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${scriptsTaskFilename}`,
+        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${stylesTaskFilename}`,
     ]);
   });
+
+  it(`${mainTaskFilename} should contain essential tasks`, () => {
+        [
+        'html',
+        'fonts',
+        'images',
+        'serve',
+        'images',
+        'fonts',
+        'build'
+        ].forEach((task) => {
+        assert.fileContent(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${mainTaskFilename}`, 
+            'gulp.task(\'' + task);
+        });
+    });
+
+    it(`${scriptsTaskFilename} should contain essential tasks`, () => {
+        [
+        'scripts'
+        ].forEach((task) => {
+        assert.fileContent(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${scriptsTaskFilename}`, 
+            'gulp.task(\'' + task);
+        });
+    });
+
+    it(`${stylesTaskFilename} should contain essential tasks`, () => {
+        [
+        'styles'
+        ].forEach((task) => {
+        assert.fileContent(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${stylesTaskFilename}`, 
+            'gulp.task(\'' + task);
+        });
+    });
 });

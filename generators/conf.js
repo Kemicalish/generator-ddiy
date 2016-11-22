@@ -8,6 +8,7 @@ module.exports = {
      TASK_FILNAME          : 'gulpfile.js',
      TASK_CONFIG_FILE      : 'conf.js',
      RUN_SERVER_TASK       : 'serve',
+     CORE_DIRNAME          : 'core',
      SCRIPTS_DIRNAME       : 'scripts',
      STYLES_DIRNAME        : 'styles',
      TEMPLATES_DIRNAME     : 'templates',
