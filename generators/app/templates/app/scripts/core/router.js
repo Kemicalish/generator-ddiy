@@ -1,6 +1,5 @@
 const $ = require('jquery');
 const _ = require('lodash');
-const log = require('./log');
 const crossroads = require('crossroads');
 
 var _history = null;
