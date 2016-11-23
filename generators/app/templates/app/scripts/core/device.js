@@ -6,7 +6,7 @@ const $			   = require('jquery');
 
 var _md = null;
 
-var init = () => {
+var init = entry => new Promise((resolve, reject) => {
     _md = new MobileDetect(window.navigator.userAgent);
     console.log('DEVICE', _md);
     //todo use it with mobile-detect-modernizr.js
@@ -20,7 +20,8 @@ var init = () => {
 
     if(_md.os()) b.addClass(`os-${_md.os()}`); 
 
-}
+    resolve(entry)
+});
 
 module.exports = {
     init:init

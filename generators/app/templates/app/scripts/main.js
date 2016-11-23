@@ -7,11 +7,17 @@ const constants		= require('./constants');
 const device		= require('./core/device'); 
 const router		= require('./core/router');
 
-router.addRoute('', () => console.log('Home Entry Point') ); 
+router.addRoute('', displayHome ); 
+
+var displayHome = () => {
+
+}
 
 
 $(document).ready(function($){
-	device.init();
-	router.init(); //should be called at last => doc ready within promise and doDocReadyStuff().then(router.init);
+	device.init()
+		.then(router.init)
+		//.then(Do your stuff)
+		.then(entry => router.trigger(window.location.pathname.substring(1)))
 });
 

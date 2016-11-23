@@ -20,16 +20,13 @@ var historyinit = () => {
         console.log(action, location.pathname, location.state)
         crossroads.parse(location.pathname)
     })
-
-    console.log('init history done!');
-    console.log('pushing state: ', _location);
-    _history.push(_location.pathname);
 }
 
 
-var init = () => {
+var init = entry => new Promise((resolve, reject) => {
     historyinit();
-}
+    resolve(entry);
+});
 
 var addRoute = (pattern, callback) => {
     crossroads.addRoute(pattern, callback);
