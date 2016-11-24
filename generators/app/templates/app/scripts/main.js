@@ -9,15 +9,15 @@ const router		= require('./core/router');
 
 router.addRoute('', displayHome ); 
 
-var displayHome = () => {
-
+function displayHome(){
+	//Init your default landing page here
 }
 
 
 $(document).ready(function($){
 	device.init()
 		.then(router.init)
-		//.then(Do your stuff)
+		//.then(Do your init stuff)
 		.then(entry => router.trigger(window.location.pathname.substring(1)))
 });
 
