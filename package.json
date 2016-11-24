@@ -36,7 +36,6 @@
     "yeoman-generator": "^0.24.1"
   },
   "devDependencies": {
-    "mkdirp": "^0.5.1",
     "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.5.1"
   }
