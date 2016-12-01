@@ -1,6 +1,6 @@
 module.exports = {
      GENERATOR_NAME        : 'pow-spa',
-     WORKSPACE_DIRNAME     : 'work',
+     WORKSPACE_DIRNAME     : '', //if WORSPACE is not at root, add an ending slash. Ex: work/
      COMPONENT_DIRNAME      : 'components',
      APP_DIRNAME           : 'app',
      TASK_DIRNAME          : 'tasks',

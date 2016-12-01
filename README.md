@@ -23,9 +23,9 @@ and run it with
 yo ddiy
 ```
 This should launch a local web server with the app landing page after asking you a few config questions.
-Your app root folder should be ready in the "work" dir. 
+Your app root folder should be ready in the <WORKSPACE_DIRNAME> dir (default is your project root). 
 
-To launch it later, from the work directory just do:
+To launch it later, from the <WORKSPACE_DIRNAME> directory just do:
 ```shell
 gulp serve
 ```
@@ -69,8 +69,8 @@ Params are passed as arguments when running `yo ddiy:components [name]`
 Constants are defined in generators/conf.js and are used by all the generators
 
 ## Gulp
-The gulp file is just loading the tasks present in `work/tasks` folder
-All the config is centralized in `work/tasks/conf.js` 
+The gulp file is just loading the tasks present in `tasks` folder
+All the config is centralized in `tasks/conf.js` 
 
 ##### Task in the App Generator
 

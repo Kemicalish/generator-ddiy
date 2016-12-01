@@ -25,28 +25,28 @@ describe('general', () => {
 
   it('creates expected app files', () => {
     assert.file([
-        `${conf.WORKSPACE_DIRNAME}/package.json`,
-        `${conf.WORKSPACE_DIRNAME}/.gitignore`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/device.js`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/router.js`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/main.js`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.STYLES_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/index.html`,
+        `${conf.WORKSPACE_DIRNAME}package.json`,
+        `${conf.WORKSPACE_DIRNAME}.gitignore`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/device.js`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/router.js`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/main.js`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.STYLES_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/index.html`,
     ]);
   });
 
   it('creates expected tasks files', () => {
     assert.file([
-        `${conf.WORKSPACE_DIRNAME}/gulpfile.js`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${mainTaskFilename}`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${scriptsTaskFilename}`,
-        `${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${stylesTaskFilename}`,
+        `${conf.WORKSPACE_DIRNAME}gulpfile.js`,
+        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${mainTaskFilename}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${scriptsTaskFilename}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${stylesTaskFilename}`,
     ]);
   });
 
@@ -60,7 +60,7 @@ describe('general', () => {
         'fonts',
         'build'
         ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${mainTaskFilename}`, 
+        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${mainTaskFilename}`, 
             'gulp.task(\'' + task);
         });
     });
@@ -69,7 +69,7 @@ describe('general', () => {
         [
         'scripts'
         ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${scriptsTaskFilename}`, 
+        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${scriptsTaskFilename}`, 
             'gulp.task(\'' + task);
         });
     });
@@ -78,7 +78,7 @@ describe('general', () => {
         [
         'styles'
         ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}/${conf.TASK_DIRNAME}/${stylesTaskFilename}`, 
+        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${stylesTaskFilename}`, 
             'gulp.task(\'' + task);
         });
     });
