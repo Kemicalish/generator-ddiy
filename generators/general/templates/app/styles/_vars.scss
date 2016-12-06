@@ -1,0 +1,106 @@
+/**
+LAYOUT
+**/
+
+
+/**
+COLORS
+**/
+$color-txt-default:#000;
+$color-bg-default:#FFF;
+
+/**
+ANIMATIONS
+**/
+
+/**
+BREAKPOINTS
+**/
+$breakpoint-768:768px;
+$breakpoint-480:480px;
+
+/**
+FONTS
+**/
+
+/*
+ * @font-face mixin
+ * Bulletproof font-face via Font Squirrel
+ * @include fontface('family', 'assets/fonts/', 'myfontname');
+ */
+@mixin fontface($font-family, $font-url, $font-name) {
+	@font-face {
+    font: {
+			  family: $font-family;
+        style: normal;
+        weight: normal;
+    }
+
+    src: url($font-url + '/' + $font-name + '.eot');
+		src: url($font-url + '/' + $font-name + '.eot#iefix') format('embedded-opentype'),
+			 url($font-url + '/' + $font-name + '.woff') format('woff'),
+			 url($font-url + '/' + $font-name + '.ttf')  format('truetype'),
+			 url($font-url + '/' + $font-name + '.svg#' + $font-name) format('svg');
+  }
+}
+
+$font-default:'Arial', serif;
+
+/**
+HELPERS
+**/
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top:($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin arrow-up($size, $color) {
+    width: 0px; 
+    height: 0px;
+    border:none;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+}
+
+@mixin arrow-down($size, $color) {
+    width: 0; 
+    height: 0; 
+    border:none;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+}
+
+@mixin arrow-right($size, $color) {
+  width: 0; 
+  height: 0; 
+  border:none;
+  border-top: $size*0.75 solid transparent;
+  border-bottom: $size*0.75 solid transparent;
+  
+  border-left: $size solid $color;
+}
+
+@mixin arrow-left($size, $color) {
+  width: 0; 
+  height: 0; 
+  
+  border-top: $size solid transparent;
+  border-bottom: $size solid transparent; 
+  
+  border-right:$size solid $color; 
+}

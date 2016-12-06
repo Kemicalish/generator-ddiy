@@ -1,0 +1,7 @@
+node_modules
+dist
+build
+test
+.tmp
+bower_components
+test/bower_components

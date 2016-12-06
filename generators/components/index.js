@@ -1,4 +1,4 @@
-var _ = require('lodash');
+const _ = require('lodash');
 const generators = require('yeoman-generator');
 const conf = require('../conf.js');
 const COMPONENT_JS_FILENAME = 'component.js';
@@ -20,19 +20,19 @@ module.exports = generators.Base.extend({
     writing: function () {
         this.fs.copyTpl(
             this.templatePath(`${COMPONENT_JS_FILENAME}`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.COMPONENT_DIRNAME}/${_constants.name}.js`),
+            this.destinationPath(`${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.COMPONENT_DIRNAME}/${_constants.name}.js`),
             _constants
         );
 
         this.fs.copyTpl(
             this.templatePath(`${COMPONENT_SCSS_FILENAME}`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.STYLES_DIRNAME}/${conf.COMPONENT_DIRNAME}/_${_constants.name}.scss`),
+            this.destinationPath(`${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.STYLES_DIRNAME}/${conf.COMPONENT_DIRNAME}/_${_constants.name}.scss`),
             _constants
         );
 
         this.fs.copyTpl(
             this.templatePath(`${COMPONENT_HBS_FILENAME}`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.TEMPLATES_DIRNAME}/${conf.COMPONENT_DIRNAME}/${_constants.name}.hbs`),
+            this.destinationPath(`${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.TEMPLATES_DIRNAME}/${conf.COMPONENT_DIRNAME}/${_constants.name}.hbs`),
             _constants
         );
     }

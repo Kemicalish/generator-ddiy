@@ -1,0 +1,13 @@
+{
+  "generator-ddiy": {
+    "appTitle": "jksjhsgdfjhsfg",
+    "rootTag": "body",
+    "localServerPort": "9010",
+    "launchServer": false,
+    "date": "2016-12-06",
+    "appName": "sdfsdf",
+    "pkg_name": "generator-ddiy",
+    "pkg_version": "0.2.4",
+    "defaultBodyContent": "<div>appName:sdfsdf</div>\n<div>appTitle:jksjhsgdfjhsfg</div>\n<div>rootTag:body</div>\n<div>localServerPort:9010</div>\n<div>launchServer:false</div>\n<div>pkg_name:generator-ddiy</div>\n<div>pkg_version:0.2.4</div>\n<div>date:2016-12-06</div>\n"
+  }
+}
