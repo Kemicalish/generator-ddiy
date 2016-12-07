@@ -50,18 +50,21 @@ module.exports = generators.Base.extend({
            _settings = user_settings.appName ? user_settings : _settings;
        }
     },
-    writing: function(){
-        
+    writing:{
+        start:() => {
+            _g.log('START WRITING APP');
+        },
+        readme: () => _g.fs.copy( 
+            _g.templatePath('readme.md'),
+            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/readme.md`)
+        )
     },
     install: function () {
-
-        
         let execDir = `${conf.WORKSPACE_DIRNAME}`;
         this.spawnCommand('npm', ['install'], {
             cwd: execDir
         }).on('close', () => {
             
-            _g.log('_constants.launchServer', _settings.launchServer);
             if (_settings.launchServer) {
                  this.spawnCommand(conf.TASK_RUNNER, [conf.RUN_SERVER_TASK], {
                     cwd: execDir

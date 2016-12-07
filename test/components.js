@@ -32,7 +32,7 @@ describe('components', () => {
         assert.file([
             jsFilePath,
             sccsFilePath,
-            hbsFilePath,
+            hbsFilePath
         ]);
     });
 
