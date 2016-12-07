@@ -55,11 +55,8 @@ module.exports = generators.Base.extend({
     },
     install: function () {
 
-        /*
+        
         let execDir = `${conf.WORKSPACE_DIRNAME}`;
-        this.spawnCommand('npm', ['install'], {
-            cwd: execDir
-        })
         this.spawnCommand('npm', ['install'], {
             cwd: execDir
         }).on('close', () => {
@@ -70,6 +67,6 @@ module.exports = generators.Base.extend({
                     cwd: execDir
                 });
             }   
-        });*/
+        });
     }
 });
