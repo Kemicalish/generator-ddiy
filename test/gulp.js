@@ -2,7 +2,16 @@ const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 const scopeDir = '../generators/gulp';
-const conf = require('../generators/conf.js');
+const pluginOptions = {
+    TASK_FILNAME: 'gulpfile.js',
+    TASK_CONFIG_FILE: 'conf.js',
+    RUN: 'serve'
+};
+
+const conf = Object.assign({},
+    require('../generators/conf.js'),
+    pluginOptions);
+
 
 const mainTaskFilename = 'main.js';
 const scriptsTaskFilename = 'scripts.js';
