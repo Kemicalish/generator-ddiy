@@ -26,5 +26,13 @@ module.exports = {
      },
      components: {
          tagName: 'div'
-     }
+     },
+     ignoreFiles: [
+        'node_modules',
+        'dev',
+        'staging',
+        'production',
+        'dist',
+        'build'
+    ]
 }

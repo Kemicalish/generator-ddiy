@@ -1,19 +1,19 @@
 const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
-const scopeDir = '../generators/tasks';
+const scopeDir = '../generators/gulp';
 const conf = require('../generators/conf.js');
 
 const mainTaskFilename = 'main.js';
 const scriptsTaskFilename = 'scripts.js';
 const stylesTaskFilename = 'styles.js';
 
-describe('tasks', () => {
+describe('gulp', () => {
   before(function (done) {
     helpers.run(path.join(__dirname, scopeDir))
       .withPrompts({features: []})
       .withGenerators([
-        [helpers.createDummyGenerator(), 'mocha:tasks']
+        [helpers.createDummyGenerator(), 'mocha:gulp']
       ])
       .on('end', done);
   });

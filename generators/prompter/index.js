@@ -1,7 +1,6 @@
 'use strict';
 const _ = require('lodash');
 const generators = require('yeoman-generator');
-const stringifyObject = require('stringify-object');
 const conf = require('../conf.js');
 
 let _settings = null;

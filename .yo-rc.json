@@ -1,13 +1,20 @@
 {
   "generator-ddiy": {
-    "appTitle": "My Great App",
+    "appName": "sdfsdf",
+    "appTitle": "jksjhsgdfjhsfg",
     "rootTag": "body",
     "localServerPort": "9010",
-    "launchServer": false,
-    "date": "2016-12-06",
-    "appName": "MyApp",
+    "launchServer": true,
     "pkg_name": "generator-ddiy",
     "pkg_version": "0.2.4",
-    "defaultBodyContent": "<div>default content</div>"
+    "date": "2016-12-07",
+    "defaultBodyContent": "<div>appName:sdfsdf</div>\n<div>appTitle:jksjhsgdfjhsfg</div>\n<div>rootTag:body</div>\n<div>localServerPort:9010</div>\n<div>launchServer:true</div>\n<div>pkg_name:generator-ddiy</div>\n<div>pkg_version:0.2.4</div>\n<div>date:2016-12-07</div>\n",
+    "TASK_RUNNER": "gulp",
+    "TASK_RUNNER_OPTIONS": {
+      "TASK_DIRNAME": "tasks",
+      "TASK_FILNAME": "gulpfile.js",
+      "TASK_CONFIG_FILE": "conf.js",
+      "RUN": "serve"
+    }
   }
 }

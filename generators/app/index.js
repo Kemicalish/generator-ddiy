@@ -1,21 +1,11 @@
 'use strict';
 const _ = require('lodash');
-const mkdirp = require('mkdirp');
 
 const generators = require('yeoman-generator');
-const conf = require('../conf.js');
-
-const ignoreFiles = [
-    'node_modules',
-    'dev',
-    'staging',
-    'production',
-    'dist',
-    'build'
-];
+const _conf = require('../conf.js');
 
 let _g = null;
-let _settings = conf.app;
+let _settings = _conf.app;
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -36,40 +26,41 @@ module.exports = generators.Base.extend({
             local: require.resolve('../general')
         });
 
-        _g.composeWith('ddiy:tasks', {
-            local: require.resolve('../tasks')
-        });
+        if(_conf.TASK_RUNNER === 'gulp') {
+            _g.composeWith('ddiy:gulp', {
+                local: require.resolve('../gulp')
+            });
+        }
     },
-
     prompting: {
         
     },
     configuring : {
-       writeConfig:() => {
-           let user_settings = _g.config.getAll();
-           _settings = user_settings.appName ? user_settings : _settings;
+       writeConfig: () => {
+           let userSettings = _g.config.getAll();
+           _settings = userSettings.appName ? userSettings : _settings;
+           _g.log(_settings);
        }
     },
-    writing:{
-        start:() => {
+    writing: {
+        start: () => {
             _g.log('START WRITING APP');
         },
         readme: () => _g.fs.copy( 
             _g.templatePath('readme.md'),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/readme.md`)
+            _g.destinationPath(`${_conf.WORKSPACE_DIRNAME}/readme.md`)
         )
     },
     install: function () {
-        let execDir = `${conf.WORKSPACE_DIRNAME}`;
+        let execDir = `${_conf.WORKSPACE_DIRNAME}`;
         this.spawnCommand('npm', ['install'], {
             cwd: execDir
         }).on('close', () => {
-            
             if (_settings.launchServer) {
-                 this.spawnCommand(conf.TASK_RUNNER, [conf.RUN_SERVER_TASK], {
+                 this.spawnCommand(_settings.TASK_RUNNER, [_settings.TASK_RUNNER_OPTIONS.RUN], {
                     cwd: execDir
                 });
-            }   
+            }
         });
     }
 });

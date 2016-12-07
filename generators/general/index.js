@@ -4,16 +4,6 @@ const mkdirp = require('mkdirp');
 
 const generators = require('yeoman-generator');
 const conf = require('../conf.js');
-
-const ignoreFiles = [
-    'node_modules',
-    'dev',
-    'staging',
-    'production',
-    'dist',
-    'build'
-];
-
 let _g = null;
 let _settings = conf.app;
 
@@ -58,7 +48,7 @@ module.exports = generators.Base.extend({
         ),
         gitignore: () => _g.fs.write(
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/.gitignore`),
-            ignoreFiles.join("\n")
+            conf.ignoreFiles.join("\n")
         ),
         templatesDir: () => mkdirp(_g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.TEMPLATES_DIRNAME}`), function (err) {
 
