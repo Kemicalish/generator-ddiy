@@ -4,7 +4,7 @@ const _				= require('lodash');
 const $				= require('jquery');
 
 const constants		= require('./constants');
-const device		= require('./core/device'); 
+const device		= require('./core/device');
 const router		= require('./core/router');
 
 function displayHome(){

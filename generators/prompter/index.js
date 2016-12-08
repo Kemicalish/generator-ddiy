@@ -31,6 +31,27 @@ module.exports = generators.Base.extend({
             message: 'Title of the app',
             default: 'My Great App',
             store: true
+        },{
+            type: 'list',
+            name: 'bundler',
+            message: 'Which Module Bundler?',
+            choices: ['browserify (require gulp)', 'webpack'],
+            default: 'webpack',
+            store: true
+        },{
+            type: 'list',
+            name: 'views',
+            message: 'Which View "Engine"?',
+            choices: ['react', 'handlebars'],
+            default: 'react',
+            store: true
+        },{
+            type: 'list',
+            name: 'states',
+            message: 'Which State Container?',
+            choices: ['none', 'redux'],
+            default: 'none',
+            store: true
         }, {
             type: 'input',
             name: 'rootTag',

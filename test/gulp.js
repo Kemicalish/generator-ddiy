@@ -13,9 +13,7 @@ const conf = Object.assign({},
     pluginOptions);
 
 
-const mainTaskFilename = 'main.js';
-const scriptsTaskFilename = 'scripts.js';
-const stylesTaskFilename = 'styles.js';
+const exampleFilename = 'info.js';
 
 describe('gulp', () => {
   before(function (done) {
@@ -36,42 +34,16 @@ describe('gulp', () => {
     assert.file([
         `${conf.WORKSPACE_DIRNAME}gulpfile.js`,
         `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${conf.TASK_CONFIG_FILE}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${mainTaskFilename}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${scriptsTaskFilename}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${stylesTaskFilename}`,
+        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${exampleFilename}`,
     ]);
   });
 
-  it(`${mainTaskFilename} should contain essential tasks`, () => {
-        [
-        'html',
-        'fonts',
-        'images',
-        'serve',
-        'images',
-        'fonts',
-        'build'
-        ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${mainTaskFilename}`, 
-            'gulp.task(\'' + task);
-        });
-    });
 
-    it(`${scriptsTaskFilename} should contain essential tasks`, () => {
+    it(`${exampleFilename} should contain essential tasks`, () => {
         [
-        'scripts'
+        'info'
         ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${scriptsTaskFilename}`, 
-            'gulp.task(\'' + task);
-        });
-    });
-
-    it(`${stylesTaskFilename} should contain essential tasks`, () => {
-        [
-        'styles'
-        ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${stylesTaskFilename}`, 
+        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${exampleFilename}`, 
             'gulp.task(\'' + task);
         });
     });

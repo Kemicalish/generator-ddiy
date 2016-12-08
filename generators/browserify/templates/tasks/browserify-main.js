@@ -4,7 +4,7 @@ const gulpLoadPlugins = require('gulp-load-plugins');
 const reload = browserSync.reload;
 const $ = gulpLoadPlugins();
 
-conf = require('./conf');
+const conf = require('./browserify-env.js');
 
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src(conf.paths.src.html)

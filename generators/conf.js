@@ -7,7 +7,7 @@ module.exports = {
      BUNDLER_DIRNAME       : 'bundler',
      TASK_DIRNAME          : 'tasks',
      TASK_RUNNER           : 'gulp',
-     CORE_DIRNAME          : 'core',
+     CORE_DIRNAME          : 'core', 
      SCRIPTS_DIRNAME       : 'scripts',
      STYLES_DIRNAME        : 'styles',
      TEMPLATES_DIRNAME     : 'templates',

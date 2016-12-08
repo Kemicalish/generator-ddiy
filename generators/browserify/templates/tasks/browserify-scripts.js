@@ -10,7 +10,7 @@ const buffer          = require('vinyl-buffer');
 const source          = require('vinyl-source-stream');
 
 
-conf = require('./conf');
+conf = require('./browserify-env.js');
 
 
 gulp.task('scripts', () => {
