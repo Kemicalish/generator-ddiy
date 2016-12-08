@@ -29,6 +29,7 @@
     "generators/webpack",
     "generators/gulp",
     "generators/browserify",
+    "generators/handlebars",
     "generators/components"
   ],
   "peerDependencies": {

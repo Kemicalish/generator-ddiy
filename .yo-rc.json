@@ -4,7 +4,7 @@
     "appTitle": "My Great App",
     "BUNDLER": "browserify",
     "TASK_RUNNER": "gulp",
-    "VIEW_ENGINE": "react",
+    "VIEW_ENGINE": "handlebars",
     "STATE_CONTAINER": "none",
     "rootTag": "body",
     "localServerPort": "9010",
@@ -12,7 +12,7 @@
     "pkg_name": "generator-ddiy",
     "pkg_version": "0.3.1",
     "date": "2016-12-08",
-    "defaultBodyContent": "<div>appName:myApp</div>\n<div>appTitle:My Great App</div>\n<div>BUNDLER:browserify</div>\n<div>TASK_RUNNER:gulp</div>\n<div>VIEW_ENGINE:react</div>\n<div>STATE_CONTAINER:none</div>\n<div>rootTag:body</div>\n<div>localServerPort:9010</div>\n<div>launchServer:true</div>\n<div>pkg_name:generator-ddiy</div>\n<div>pkg_version:0.3.1</div>\n<div>date:2016-12-08</div>\n",
+    "defaultBodyContent": "<div>appName:myApp</div>\n<div>appTitle:My Great App</div>\n<div>BUNDLER:browserify</div>\n<div>TASK_RUNNER:gulp</div>\n<div>VIEW_ENGINE:handlebars</div>\n<div>STATE_CONTAINER:none</div>\n<div>rootTag:body</div>\n<div>localServerPort:9010</div>\n<div>launchServer:true</div>\n<div>pkg_name:generator-ddiy</div>\n<div>pkg_version:0.3.1</div>\n<div>date:2016-12-08</div>\n",
     "TASK_RUNNER_OPTIONS": {
       "TASK_DIRNAME": "tasks",
       "TASK_FILNAME": "gulpfile.js",
@@ -70,6 +70,7 @@
         "lodash": "^4.13.1"
       },
       "dependencies": {
+        "handlebars": "^4.0.5",
         "jquery": "~2.1.1",
         "mobile-detect": "^1.3.5",
         "crossroads": "^0.12.2",
@@ -94,6 +95,7 @@
           ]
         }
       }
-    }
+    },
+    "VIEW_ENGINE_OPTIONS": {}
   }
 }

@@ -30,11 +30,10 @@ module.exports = generators.Base.extend({
         });
 
         //TASK RUNNERS
-        if(_conf.TASK_RUNNER === 'gulp') {
-            _g.composeWith('ddiy:gulp', {
-                local: require.resolve('../gulp')
-            });
-        }
+        _g.composeWith('ddiy:gulp', {
+            local: require.resolve('../gulp')
+        });
+        
 
         //BUNDLERS
         _g.composeWith('ddiy:webpack', {
@@ -44,6 +43,11 @@ module.exports = generators.Base.extend({
         _g.composeWith('ddiy:browserify', {
             local: require.resolve('../browserify')
         });
+
+        //VIEW ENGINES
+        _g.composeWith('ddiy:handlebars', {
+            local: require.resolve('../handlebars')
+        });
     },
     prompting: {
         
@@ -52,7 +56,6 @@ module.exports = generators.Base.extend({
        writeConfig: () => {
            let userSettings = _g.config.getAll();
            _settings = userSettings.appName ? userSettings : _settings;
-           _g.log(_settings);
        }
     },
     writing: {
