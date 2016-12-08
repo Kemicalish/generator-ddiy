@@ -1,9 +1,10 @@
 'use strict';
+require('babel-polyfill');
 const _ = require('lodash');
 
 const generators = require('yeoman-generator');
 const _conf = require('../conf.js');
-const packageJson = require('../packageJsonBase.js');
+const packageJson = require('../package-json-base.js');
 
 let _g = null;
 let _settings = _conf.app;
@@ -86,7 +87,7 @@ module.exports = generators.Base.extend({
             _g.log('APP RUN');
             _g.log(_settings);
             if (_settings.launchServer) {
-                 this.spawnCommand(..._settings.BUNDLER_OPTIONS.RUN, {
+                 this.spawnCommand(_settings.BUNDLER_OPTIONS.RUN[0], _settings.BUNDLER_OPTIONS.RUN[1], {
                     cwd: execDir
                 });
             }

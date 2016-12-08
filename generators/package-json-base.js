@@ -31,6 +31,9 @@ module.exports = {
   'dependencies': {
     'jquery': '~2.1.1',
     'mobile-detect': '^1.3.5',
-    'crossroads': '^0.12.2'
+    'crossroads': '^0.12.2',
+    "history": "^4.3.0",
+    "image-preloader": "^1.1.1",
+    "font-awesome": "^4.6.3"
   }
 }

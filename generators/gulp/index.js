@@ -2,6 +2,7 @@
 const generators = require('yeoman-generator');
 const core = require('../core.js');
 const conf = require('../conf.js');
+const packageJson = require('./package-json-base.js');
 const pluginOptions = {
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_FILNAME: 'gulpfile.js',
@@ -31,18 +32,7 @@ module.exports = generators.Base.extend({
     },
     configuring: {
         writeConfig: () => {
-            let userSettings = _g.config.getAll();
-            let currentTaskRunner = _g.config.get(PLUGIN_CONFIG_KEY);
-            if (currentTaskRunner !== null
-                && typeof (currentTaskRunner) !== 'undefined'
-                && currentTaskRunner !== PLUGIN_NAME) {
-                throw new core.DdiyException(ERRORS.ERR_TASK_RUNNER_EXISTS,
-                    `Task runner already set to: ${currentTaskRunner}`);
-            }
-
-            _g.config.set(PLUGIN_CONFIG_KEY, PLUGIN_NAME);
-            _g.config.set(`${PLUGIN_CONFIG_KEY}_OPTIONS`, pluginOptions);
-            _settings = userSettings.appName ? userSettings : _settings;
+            return core.TaskRunner.config(_g, PLUGIN_NAME, pluginOptions, packageJson);
         }
     },
     writing: {

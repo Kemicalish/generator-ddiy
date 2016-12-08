@@ -3,6 +3,7 @@ const generators = require('yeoman-generator');
 const _ = require('lodash');
 const core = require('../core.js');
 const conf = require('../conf.js');
+const packageJson = require('./package-json-base.js');
 const pluginOptions = {
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_CONFIG_FILE: 'browserify-env.js',
@@ -26,7 +27,7 @@ module.exports = generators.Base.extend({
     },
     configuring: {
         writeConfig: () => {
-            return core.Bundler.config(_g, PLUGIN_NAME, pluginOptions);
+            return core.Bundler.config(_g, PLUGIN_NAME, pluginOptions, packageJson);
         }
     },
     writing: function () {   
