@@ -55,8 +55,8 @@ module.exports = generators.Base.extend({
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_FILNAME}`),
             _settings
         ),
-        gulpConfig: () => _g.fs.copyTpl(
-            _g.templatePath(`${pluginOptions.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`),
+        envConfig: () => _g.fs.copyTpl(
+            _g.templatePath(`${pluginOptions.BUNDLER_CONFIG_FILE}`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`),
             _settings
         )
