@@ -1,7 +1,7 @@
 const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
-const scopeDir = '../generators/gulp';
+const scopeDir = '../generators/webpack';
 const pluginOptions = {
     BUNDLER_FILNAME: 'webpack.config.js',
     BUNDLER_CONFIG_FILE: 'env.js',
@@ -29,7 +29,7 @@ describe('webpack', () => {
     require(scopeDir);
   });
 
-  it('creates expected tasks files', () => {
+  it('creates expected bundler files', () => {
     assert.file([
         `${conf.WORKSPACE_DIRNAME}${pluginOptions.BUNDLER_FILNAME}`,
         `${conf.WORKSPACE_DIRNAME}${conf.BUNDLER_DIRNAME}`,
