@@ -1,5 +1,6 @@
 'use strict';
 const generators = require('yeoman-generator');
+const core = require('../core.js');
 const conf = require('../conf.js');
 const pluginOptions = {
     TASK_DIRNAME: conf.TASK_DIRNAME,
@@ -17,13 +18,7 @@ const ERRORS = {
     ERR_TASK_RUNNER_EXISTS: 'ERR_TASK_RUNNER_EXISTS'
 }
 
-function DdiyException(value, message) {
-    this.value = value;
-    this.message = message;
-    this.toString = function () {
-        return `${this.value}: ${this.message}`;
-    };
-}
+
 
 
 module.exports = generators.Base.extend({
@@ -44,7 +39,7 @@ module.exports = generators.Base.extend({
             if (currentTaskRunner !== null
                 && typeof (currentTaskRunner) !== 'undefined'
                 && currentTaskRunner !== PLUGIN_NAME) {
-                throw new DdiyException(ERRORS.ERR_TASK_RUNNER_EXISTS,
+                throw new core.DdiyException(ERRORS.ERR_TASK_RUNNER_EXISTS,
                     `Task runner already set to: ${currentTaskRunner}`);
             }
 
