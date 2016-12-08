@@ -1,6 +1,8 @@
 const path = require('path');
 const helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
 const scopeDir = '../generators/app';
+const conf = require('../generators/conf.js');
 
 describe('app', () => {
   before(function (done) {
@@ -20,6 +22,12 @@ describe('app', () => {
   it('the generator can be required without throwing', () => {
     // not testing the actual run of generators yet
     require(scopeDir);
+  });
+
+  it('creates package.json file', () => {
+    assert.file([
+        `${conf.WORKSPACE_DIRNAME}package.json`
+    ]);
   });
 
 });

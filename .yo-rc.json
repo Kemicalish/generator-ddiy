@@ -7,12 +7,12 @@
     "VIEW_ENGINE": "react",
     "STATE_CONTAINER": "none",
     "rootTag": "body",
-    "localServerPort": "9010",
+    "localServerPort": "9025",
     "launchServer": true,
     "pkg_name": "generator-ddiy",
     "pkg_version": "0.3.1",
     "date": "2016-12-08",
-    "defaultBodyContent": "<div>appName:myApp</div>\n<div>appTitle:My Great App</div>\n<div>BUNDLER:browserify</div>\n<div>TASK_RUNNER:gulp</div>\n<div>VIEW_ENGINE:react</div>\n<div>STATE_CONTAINER:none</div>\n<div>rootTag:body</div>\n<div>localServerPort:9010</div>\n<div>launchServer:true</div>\n<div>pkg_name:generator-ddiy</div>\n<div>pkg_version:0.3.1</div>\n<div>date:2016-12-08</div>\n",
+    "defaultBodyContent": "<div>appName:myApp</div>\n<div>appTitle:My Great App</div>\n<div>BUNDLER:browserify</div>\n<div>TASK_RUNNER:gulp</div>\n<div>VIEW_ENGINE:react</div>\n<div>STATE_CONTAINER:none</div>\n<div>rootTag:body</div>\n<div>localServerPort:9025</div>\n<div>launchServer:true</div>\n<div>pkg_name:generator-ddiy</div>\n<div>pkg_version:0.3.1</div>\n<div>date:2016-12-08</div>\n",
     "TASK_RUNNER_OPTIONS": {
       "TASK_DIRNAME": "tasks",
       "TASK_FILNAME": "gulpfile.js",
@@ -28,6 +28,42 @@
           "serve"
         ]
       ]
+    },
+    "packageJson": {
+      "private": true,
+      "engines": {
+        "node": ">=4"
+      },
+      "devDependencies": {
+        "babel-core": "^6.4.0",
+        "babel-polyfill": "^6.16.0",
+        "babel-preset-es2015": "^6.3.13",
+        "babel-register": "^6.5.2",
+        "browser-sync": "^2.2.1",
+        "del": "^1.1.1",
+        "glob": "^7.0.3",
+        "glob-fs": "^0.1.6",
+        "lodash": "^4.13.1",
+        "require-dir": "^0.3.1"
+      },
+      "eslintConfig": {
+        "env": {
+          "es6": true,
+          "node": true,
+          "browser": true
+        },
+        "rules": {
+          "quotes": [
+            2,
+            "single"
+          ]
+        }
+      },
+      "dependencies": {
+        "jquery": "~2.1.1",
+        "mobile-detect": "^1.3.5",
+        "crossroads": "^0.12.2"
+      }
     }
   }
 }

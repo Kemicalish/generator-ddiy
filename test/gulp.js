@@ -4,8 +4,7 @@ const assert = require('yeoman-assert');
 const scopeDir = '../generators/gulp';
 const pluginOptions = {
     TASK_FILNAME: 'gulpfile.js',
-    TASK_CONFIG_FILE: 'conf.js',
-    RUN: 'serve'
+    TASK_CONFIG_FILE: 'conf.js'
 };
 
 const conf = Object.assign({},

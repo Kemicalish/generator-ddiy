@@ -22,7 +22,6 @@ describe('general', () => {
 
   it('creates expected app files', () => {
     assert.file([
-        `${conf.WORKSPACE_DIRNAME}package.json`,
         `${conf.WORKSPACE_DIRNAME}.gitignore`,
         `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}`,
         `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}`,

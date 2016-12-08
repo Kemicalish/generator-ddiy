@@ -32,10 +32,6 @@ module.exports = generators.Base.extend({
             _g.templatePath(`${conf.APP_DIRNAME}/**/*`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}`)
         ),
-        packageJSON: () => _g.fs.copy(
-            _g.templatePath('package.json'),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/package.json`)
-        ),
         constants: () => _g.fs.copyTpl(
             _g.templatePath(`${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`),

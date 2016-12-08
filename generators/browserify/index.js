@@ -1,5 +1,6 @@
 'use strict';
 const generators = require('yeoman-generator');
+const _ = require('lodash');
 const core = require('../core.js');
 const conf = require('../conf.js');
 const pluginOptions = {
@@ -11,12 +12,6 @@ let _g = null;
 let _settings = conf.app;
 
 const PLUGIN_NAME = 'browserify';
-const PLUGIN_CONFIG_KEY = 'BUNDLER';
-
-const ERRORS = {
-    ERR_TASK_RUNNER_EXISTS: 'ERR_BUNDLER_EXISTS'
-};
-
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -31,29 +26,17 @@ module.exports = generators.Base.extend({
     },
     configuring: {
         writeConfig: () => {
-            _settings = _g.config.getAll();
-            let currentBundler = _g.config.get(PLUGIN_CONFIG_KEY);
-
-            if (currentBundler === null || typeof (currentBundler) === 'undefined') {
-                _g.config.set(PLUGIN_CONFIG_KEY, PLUGIN_NAME);
-            } else if (currentBundler !== PLUGIN_NAME) {
-                return _settings;
-            }
-
-            //If Browserify is the chosen bundler:
-            _g.log('BROWSERIFY CONFIG');
-            _g.config.set(PLUGIN_CONFIG_KEY, PLUGIN_NAME);
-            _g.config.set(`${PLUGIN_CONFIG_KEY}_OPTIONS`, pluginOptions);
-            _g.config.save();
-            return _settings;
+            return core.Bundler.config(_g, PLUGIN_NAME, pluginOptions);
         }
     },
-    writing: function () {
-        _settings = _g.config.getAll();
-
-        if (_settings[PLUGIN_CONFIG_KEY] !== PLUGIN_NAME) {
+    writing: function () {   
+        if (!core.Bundler.isSelected(_g, PLUGIN_NAME)) {
             return;
         }
+
+        _settings = _.merge({},
+            conf.app,
+            _g.config.getAll());
 
         _g.log('BROWSERIFY WRITING');
 
