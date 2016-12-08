@@ -26,6 +26,12 @@ module.exports = generators.Base.extend({
             local: require.resolve('../general')
         });
 
+        if(_conf.BUNDLER === 'webpack') {
+            _g.composeWith('ddiy:webpack', {
+                local: require.resolve('../webpack')
+            });
+        }
+
         if(_conf.TASK_RUNNER === 'gulp') {
             _g.composeWith('ddiy:gulp', {
                 local: require.resolve('../gulp')

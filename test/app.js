@@ -9,6 +9,7 @@ describe('app', () => {
       .withGenerators([
         [helpers.createDummyGenerator(), 'ddiy:general'],
         [helpers.createDummyGenerator(), 'ddiy:prompter'],
+        [helpers.createDummyGenerator(), 'ddiy:webpack'],
         [helpers.createDummyGenerator(), 'ddiy:gulp'],
         [helpers.createDummyGenerator(), 'mocha:app']
       ])

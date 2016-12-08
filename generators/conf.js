@@ -3,6 +3,8 @@ module.exports = {
      WORKSPACE_DIRNAME     : 'work/', //if WORKSPACE is not at root, add an ending slash. Ex: work/
      COMPONENT_DIRNAME      : 'components',
      APP_DIRNAME           : 'app',
+     BUNDLER               : 'browserify',                
+     BUNDLER_DIRNAME       : 'bundler',
      TASK_DIRNAME          : 'tasks',
      TASK_RUNNER           : 'gulp',
      CORE_DIRNAME          : 'core',

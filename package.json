@@ -26,6 +26,7 @@
     "generators/app",
     "generators/prompter",
     "generators/general",
+    "generators/webpack",
     "generators/gulp",
     "generators/components"
   ],
