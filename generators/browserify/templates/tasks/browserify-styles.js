@@ -5,7 +5,6 @@ const reload = browserSync.reload;
 const $ = gulpLoadPlugins();
 
 conf = require('./browserify-env.js');
-
 gulp.task('styles', () => {
   return gulp.src(conf.paths.src.css)
     .pipe($.plumber())

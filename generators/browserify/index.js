@@ -5,7 +5,7 @@ const conf = require('../conf.js');
 const pluginOptions = {
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_CONFIG_FILE: 'browserify-env.js',
-    RUN: 'serve'
+    RUN: ['gulp', ['serve']]
 };
 let _g = null;
 let _settings = conf.app;
@@ -31,30 +31,42 @@ module.exports = generators.Base.extend({
     },
     configuring: {
         writeConfig: () => {
-            let userSettings = _g.config.getAll();
+            _settings = _g.config.getAll();
             let currentBundler = _g.config.get(PLUGIN_CONFIG_KEY);
-            if (currentBundler !== null
-                && typeof (currentBundler) !== 'undefined'
-                && currentBundler !== PLUGIN_NAME) {
-                throw new core.DdiyException(ERRORS.ERR_BUNDLER_EXISTS,
-                    `Bundler already set to: ${currentBundler}`);
+
+            if (currentBundler === null || typeof (currentBundler) === 'undefined') {
+                _g.config.set(PLUGIN_CONFIG_KEY, PLUGIN_NAME);
+            } else if (currentBundler !== PLUGIN_NAME) {
+                return _settings;
             }
 
+            //If Browserify is the chosen bundler:
+            _g.log('BROWSERIFY CONFIG');
             _g.config.set(PLUGIN_CONFIG_KEY, PLUGIN_NAME);
             _g.config.set(`${PLUGIN_CONFIG_KEY}_OPTIONS`, pluginOptions);
-            _settings = userSettings.appName ? userSettings : _settings;
+            _g.config.save();
+            return _settings;
         }
     },
-    writing: {
-        taskDir: () => _g.fs.copy(
+    writing: function () {
+        _settings = _g.config.getAll();
+
+        if (_settings[PLUGIN_CONFIG_KEY] !== PLUGIN_NAME) {
+            return;
+        }
+
+        _g.log('BROWSERIFY WRITING');
+
+        _g.fs.copy(
             _g.templatePath(`${pluginOptions.TASK_DIRNAME}/**/*`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.TASK_DIRNAME}`)
-        ),
-        envConfig: () => _g.fs.copyTpl(
+        );
+
+        _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.TASK_DIRNAME}/${pluginOptions.TASK_CONFIG_FILE}`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.TASK_DIRNAME}/${pluginOptions.TASK_CONFIG_FILE}`),
             _settings
-        )
+        );
     },
     install: function () {
 

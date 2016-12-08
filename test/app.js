@@ -11,6 +11,7 @@ describe('app', () => {
         [helpers.createDummyGenerator(), 'ddiy:prompter'],
         [helpers.createDummyGenerator(), 'ddiy:webpack'],
         [helpers.createDummyGenerator(), 'ddiy:gulp'],
+        [helpers.createDummyGenerator(), 'ddiy:browserify'],
         [helpers.createDummyGenerator(), 'mocha:app']
       ])
       .on('end', done);

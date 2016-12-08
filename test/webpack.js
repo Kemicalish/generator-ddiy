@@ -5,7 +5,7 @@ const scopeDir = '../generators/webpack';
 const pluginOptions = {
     BUNDLER_FILNAME: 'webpack.config.js',
     BUNDLER_CONFIG_FILE: 'env.js',
-    RUN: 'serve'
+    RUN: ['npm', ['run', 'serve']]
 };
 
 const conf = Object.assign({},

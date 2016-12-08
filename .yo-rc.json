@@ -2,26 +2,32 @@
   "generator-ddiy": {
     "appName": "myApp",
     "appTitle": "My Great App",
+    "BUNDLER": "browserify",
+    "TASK_RUNNER": "gulp",
+    "VIEW_ENGINE": "react",
+    "STATE_CONTAINER": "none",
     "rootTag": "body",
     "localServerPort": "9010",
     "launchServer": true,
     "pkg_name": "generator-ddiy",
     "pkg_version": "0.3.1",
     "date": "2016-12-08",
-    "defaultBodyContent": "<div>appName:myApp</div>\n<div>appTitle:My Great App</div>\n<div>rootTag:body</div>\n<div>localServerPort:9010</div>\n<div>launchServer:true</div>\n<div>pkg_name:generator-ddiy</div>\n<div>pkg_version:0.3.1</div>\n<div>date:2016-12-08</div>\n",
-    "TASK_RUNNER": "gulp",
+    "defaultBodyContent": "<div>appName:myApp</div>\n<div>appTitle:My Great App</div>\n<div>BUNDLER:browserify</div>\n<div>TASK_RUNNER:gulp</div>\n<div>VIEW_ENGINE:react</div>\n<div>STATE_CONTAINER:none</div>\n<div>rootTag:body</div>\n<div>localServerPort:9010</div>\n<div>launchServer:true</div>\n<div>pkg_name:generator-ddiy</div>\n<div>pkg_version:0.3.1</div>\n<div>date:2016-12-08</div>\n",
     "TASK_RUNNER_OPTIONS": {
       "TASK_DIRNAME": "tasks",
       "TASK_FILNAME": "gulpfile.js",
       "TASK_CONFIG_FILE": "conf.js",
       "RUN": "serve"
     },
-    "BUNDLER": "webpack",
     "BUNDLER_OPTIONS": {
-      "BUNDLER_DIRNAME": "bundler",
-      "BUNDLER_FILNAME": "webpack.config.js",
-      "BUNDLER_CONFIG_FILE": "env.js",
-      "RUN": "serve"
+      "TASK_DIRNAME": "tasks",
+      "TASK_CONFIG_FILE": "browserify-env.js",
+      "RUN": [
+        "gulp",
+        [
+          "serve"
+        ]
+      ]
     }
   }
 }

@@ -4,7 +4,7 @@ const assert = require('yeoman-assert');
 const scopeDir = '../generators/browserify';
 const pluginOptions = {
     BUNDLER_CONFIG_FILE: 'browserify-env.js',
-    RUN: 'serve'
+    RUN: ['gulp', ['serve']]
 };
 
 const conf = Object.assign({},

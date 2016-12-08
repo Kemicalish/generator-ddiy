@@ -37,6 +37,10 @@ module.exports = generators.Base.extend({
                 local: require.resolve('../gulp')
             });
         }
+
+        _g.composeWith('ddiy:browserify', {
+            local: require.resolve('../browserify')
+        });
     },
     prompting: {
         
@@ -58,12 +62,16 @@ module.exports = generators.Base.extend({
         )
     },
     install: function () {
+
         let execDir = `${_conf.WORKSPACE_DIRNAME}`;
+        _g.log('INSTALL!');
         this.spawnCommand('npm', ['install'], {
             cwd: execDir
         }).on('close', () => {
+            _g.log('RUN!');
+            _g.log(_settings);
             if (_settings.launchServer) {
-                 this.spawnCommand(_settings.TASK_RUNNER, [_settings.TASK_RUNNER_OPTIONS.RUN], {
+                 this.spawnCommand(..._settings.BUNDLER_OPTIONS.RUN, {
                     cwd: execDir
                 });
             }

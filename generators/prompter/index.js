@@ -6,7 +6,31 @@ const conf = require('../conf.js');
 let _settings = null;
 let _g = null;
 
+const taskRunners = [
+    ['gulp', 'gulp'],
+    ['grunt', 'grunt']
+];
 
+const bundlers = [
+    ['webpack', 'webpack'],
+    ['browserify', 'browserify (require gulp)']
+];
+
+const viewEngines = [
+    ['react', 'react'],
+    ['handlebars', 'handlebars']
+]
+
+const stateContainers = [
+    ['none', 'none'],
+    ['redux', 'redux (require react)']
+];
+
+function toChoices(arr){
+    return arr.map(b => {
+        return {name: b[1], value: b[0]};
+    });
+}
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -33,23 +57,30 @@ module.exports = generators.Base.extend({
             store: true
         },{
             type: 'list',
-            name: 'bundler',
+            name: 'BUNDLER',
             message: 'Which Module Bundler?',
-            choices: ['browserify (require gulp)', 'webpack'],
+            choices: toChoices(bundlers),
             default: 'webpack',
             store: true
         },{
             type: 'list',
-            name: 'views',
+            name: 'TASK_RUNNER',
+            message: 'Which Task Runner?',
+            choices: toChoices(taskRunners),
+            default: 'gulp',
+            store: true
+        },{
+            type: 'list',
+            name: 'VIEW_ENGINE',
             message: 'Which View "Engine"?',
-            choices: ['react', 'handlebars'],
+            choices: toChoices(viewEngines),
             default: 'react',
             store: true
         },{
             type: 'list',
-            name: 'states',
+            name: 'STATE_CONTAINER',
             message: 'Which State Container?',
-            choices: ['none', 'redux'],
+            choices: toChoices(stateContainers),
             default: 'none',
             store: true
         }, {
@@ -71,7 +102,8 @@ module.exports = generators.Base.extend({
             default: true,
             store: true
         }]).then(function (answers) {
-                _settings = Object.assign({}, answers,
+                _settings = Object.assign({}, 
+                    answers,
                     {
                         pkg_name: _g.pkg.name,
                         pkg_version: _g.pkg.version,
@@ -86,12 +118,14 @@ module.exports = generators.Base.extend({
                     .value()
                     .join('');
 
+                _g.config.set(_settings);
+                _g.config.save();
+
         }.bind(this));
     },
     configuring : {
        writeConfig:() => {
-           _g.config.set(_settings);
-           _g.config.save();
+           
        }
     }
 });
