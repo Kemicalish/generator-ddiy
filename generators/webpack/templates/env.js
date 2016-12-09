@@ -11,13 +11,12 @@ const args = _.merge({},
         .fromPairs()
         .value());
 
-console.log(args);
-
-
 const env = args.env;
+console.log(env);
 
 const paths = { 
     default: {
+        entry: './app/scripts/main.js',
         output: { 
            path: './dev',
             //publicPath: '/dev/',

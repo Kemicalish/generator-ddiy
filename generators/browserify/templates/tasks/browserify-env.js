@@ -1,7 +1,7 @@
 const gutil = require('gulp-util')
 const _     = require('lodash');
 const env   = gutil.env.env || 'development';
-
+console.log(env);
 
 var paths = { 
     default: {

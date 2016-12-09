@@ -14,6 +14,11 @@ module.exports = {
     'glob-fs': '^0.1.6',
     'lodash': '^4.13.1',
     'require-dir': '^0.3.1',
+    "css-loader": "^0.26.1",
+    "image-webpack-loader": "^3.0.0",
+    "node-sass": "^3.13.0",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
   },
   'eslintConfig': {
     'env': {

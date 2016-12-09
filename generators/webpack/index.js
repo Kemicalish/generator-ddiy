@@ -2,6 +2,7 @@
 const generators = require('yeoman-generator');
 const core = require('../core.js');
 const conf = require('../conf.js');
+const packageJson = require('./package-json-base.js');
 const pluginOptions = {
     BUNDLER_DIRNAME: conf.BUNDLER_DIRNAME,
     BUNDLER_FILNAME: 'webpack.config.js',
@@ -26,7 +27,7 @@ module.exports = generators.Base.extend({
     },
     configuring: {
         writeConfig: () => {
-            return core.Bundler.config(_g, PLUGIN_NAME, pluginOptions);
+            return core.Bundler.config(_g, PLUGIN_NAME, pluginOptions, packageJson);
         }
     },
     writing: function () {
@@ -41,12 +42,13 @@ module.exports = generators.Base.extend({
         _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.BUNDLER_FILNAME}`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_FILNAME}`),
-            _settings
+            Object.assign({}, _settings, pluginOptions)
         );
+
         _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.BUNDLER_CONFIG_FILE}`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`),
-            _settings
+            Object.assign({}, _settings, pluginOptions)
         );
     },
     install: function () {

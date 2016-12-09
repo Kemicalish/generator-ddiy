@@ -1,9 +1,8 @@
 const webpack = require('webpack');
-const conf = require('./webpack/env.js');
-console.log(conf.paths.output);
+const conf = require('./<%= BUNDLER_DIRNAME %>/<%= BUNDLER_CONFIG_FILE %>');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: conf.paths.entry,
     output: conf.paths.output,
     devServer: {
         inline: true //default should be true. Only use iframe if production should be within iframe too
