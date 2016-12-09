@@ -7,23 +7,31 @@ let _settings = null;
 let _g = null;
 
 const taskRunners = [
+    ['none', 'none'],
     ['gulp', 'gulp'],
-    ['grunt', 'grunt']
+    ['grunt', 'grunt  (soon)']
 ];
 
 const bundlers = [
+    ['none', 'none'],
     ['webpack', 'webpack'],
     ['browserify', 'browserify (require gulp)']
 ];
 
 const viewEngines = [
-    ['react', 'react'],
+    ['none', 'none'],
+    ['react', 'react  (soon)'],
     ['handlebars', 'handlebars']
 ]
 
 const stateContainers = [
     ['none', 'none'],
-    ['redux', 'redux (require react)']
+    ['redux', 'redux (require react)  (soon)']
+];
+
+const unitTestEngines = [
+    ['none', 'none'],
+    ['mocha', 'mocha (soon)']
 ];
 
 function toChoices(arr){
@@ -81,6 +89,13 @@ module.exports = generators.Base.extend({
             name: 'STATE_CONTAINER',
             message: 'Which State Container?',
             choices: toChoices(stateContainers),
+            default: 'none',
+            store: true
+        },{
+            type: 'list',
+            name: 'UNIT_TEST_ENGINE',
+            message: 'Which Unit Test Engine?',
+            choices: toChoices(unitTestEngines),
             default: 'none',
             store: true
         }, {
