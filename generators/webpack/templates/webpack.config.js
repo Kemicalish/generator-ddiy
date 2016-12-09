@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const conf = require('./<%= BUNDLER_DIRNAME %>/<%= BUNDLER_CONFIG_FILE %>');
+const IndexHtmlPlugin = require('indexhtml-webpack-plugin');
 
 module.exports = {
     entry: conf.paths.entry,
@@ -9,7 +10,12 @@ module.exports = {
     },
     devtool: 'source-map',
     module: {
-        loaders: [{
+        loaders: [
+        {
+            test: /\.html$/,
+            loader: 'html'
+        },
+        {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel-loader'
@@ -28,6 +34,7 @@ module.exports = {
         }]
     },
     plugins: [
+        new IndexHtmlPlugin('index.html', 'index.html'),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false

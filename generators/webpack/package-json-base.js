@@ -7,7 +7,8 @@ module.exports = {
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack-dev-server": "^1.16.2",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "indexhtml-webpack-plugin": "^0.1.9"
   },
   'dependencies': {
 

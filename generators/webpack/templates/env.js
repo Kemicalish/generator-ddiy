@@ -16,11 +16,14 @@ console.log(env);
 
 const paths = { 
     default: {
-        entry: './app/scripts/main.js',
+        entry: {
+            app: './app/scripts/main.js',
+            'index.html': './app/index.html'
+        },
         output: { 
            path: './dev',
             //publicPath: '/dev/',
-            filename: 'app.dev.bundle.js'
+            filename: '[name].dev.bundle.js'
         } 
     },
     development: {
@@ -30,21 +33,21 @@ const paths = {
         output: { 
            path: './staging',
             //publicPath: '/staging/',
-            filename: 'app.staging.bundle.js'
+            filename: '[name].staging.bundle.js'
         } 
     },
     production: {
         output: { 
            path: './prod',
            //publicPath: '/prod/',
-           filename: 'app.bundle.js'
+           filename: '[name].bundle.js'
         } 
     }
 };
 
 const constants = {
     default: {
-        jsFilename: 'bundle.js',
+
     },
     development: {
     },
