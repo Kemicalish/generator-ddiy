@@ -6,18 +6,12 @@ const packageJson = require('./package-json-base.js');
 const pluginOptions = {
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_FILNAME: 'gulpfile.js',
-    TASK_CONFIG_FILE: 'conf.js',
-    RUN: 'serve'
+    TASK_CONFIG_FILE: 'conf.js'
 };
 let _g = null;
 let _settings = conf.app;
 
 const PLUGIN_NAME = 'gulp';
-const PLUGIN_CONFIG_KEY = 'TASK_RUNNER';
-
-const ERRORS = {
-    ERR_TASK_RUNNER_EXISTS: 'ERR_TASK_RUNNER_EXISTS'
-};
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
