@@ -13,21 +13,21 @@ function DdiyException(value, message) {
 }
 
 const PackageJson = {
-    merge:(generator, packageJson) => {
+    merge: (generator, packageJson) => {
         let settings = generator.config.getAll();
         generator.config.set('packageJson',
-            _.merge(packageJson,settings.packageJson || {}));
+            _.merge(packageJson, settings.packageJson || {}));
         generator.config.save();
-        generator.log('NEW PACKAGE JSON')
+        generator.log('NEW PACKAGE JSON');
         //generator.log(generator.config.get('packageJson'));
     }
-}
+};
 
 const getModuleConfig = (configKey) => {
     return (generator, name, options, packageJson) => {
         let settings = generator.config.getAll();
         let current = generator.config.get(configKey);
-        generator.log(configKey + ' => ' + name + ' START');
+        generator.log(`${configKey.toUpperCase()}  => ${name} START`);
 
         if (current === null || typeof (current) === 'undefined') {
             generator.config.set(configKey, name);
@@ -35,7 +35,7 @@ const getModuleConfig = (configKey) => {
             return settings;
         }
 
-        generator.log(`${name.toUpperCase()}  => ${name} CONFIG`);
+        generator.log(`${configKey.toUpperCase()}  => ${name} CONFIG`);
         generator.config.set(configKey, name);
         generator.config.set(`${configKey}_OPTIONS`, options);
         generator.config.save();
@@ -47,7 +47,7 @@ const getModuleConfig = (configKey) => {
     }
 }
 
-const ViewEngine =  {
+const ViewEngine = {
     config: getModuleConfig(VIEW_ENGINE_CONFIG_KEY),
     isSelected: (generator, bundlerName) => {
         let settings = generator.config.getAll();
