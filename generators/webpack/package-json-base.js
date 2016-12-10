@@ -8,7 +8,7 @@ module.exports = {
     "style-loader": "^0.13.1",
     "webpack-dev-server": "^1.16.2",
     "webpack": "^1.14.0",
-    "indexhtml-webpack-plugin": "^0.1.9"
+    "copy-webpack-plugin": "^4.0.1",
   },
   'dependencies': {
 

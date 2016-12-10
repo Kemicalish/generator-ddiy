@@ -25,6 +25,14 @@ module.exports = {
         "hbsfy": "^2.7.0",
     },
     'dependencies': {
-        
+
+    },
+    scripts: {
+        "build": "gulp build --env=development",
+        "build:staging": "gulp build --env=staging",
+        "build:prod": "gulp build --env=production",
+        "serve": "gulp serve --env=development",
+        "serve:staging": "gulp serve --env=staging",
+        "serve:prod": "gulp serve --env=production"
     }
 }

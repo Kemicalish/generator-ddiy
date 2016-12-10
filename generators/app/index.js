@@ -87,13 +87,21 @@ module.exports = generators.Base.extend({
         this.spawnCommand('npm', ['install'], {
             cwd: execDir
         }).on('close', () => {
-            _g.log('APP RUN');
+            _g.log('APP BUILD');
             _g.log(_settings);
-            if (_settings.launchServer) {
-                 this.spawnCommand(_settings.BUNDLER_OPTIONS.RUN[0], _settings.BUNDLER_OPTIONS.RUN[1], {
-                    cwd: execDir
-                });
-            }
-        });
+            
+            this.spawnCommand(_settings.BUNDLER_OPTIONS.BUILD[0], _settings.BUNDLER_OPTIONS.BUILD[1], {
+                cwd: execDir
+            }).on('close', () => {
+                _g.log('APP SERVE');
+                _g.log(_settings);
+                if (_settings.launchServer) {
+                    this.spawnCommand(_settings.BUNDLER_OPTIONS.SERVE[0], _settings.BUNDLER_OPTIONS.SERVE[1], {
+                        cwd: execDir
+                    });
+                }
+            })
+            
+        })
     }
 });

@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const conf = require('./<%= BUNDLER_DIRNAME %>/<%= BUNDLER_CONFIG_FILE %>');
-const IndexHtmlPlugin = require('indexhtml-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: conf.paths.entry,
@@ -34,7 +34,17 @@ module.exports = {
         }]
     },
     plugins: [
-        new IndexHtmlPlugin('index.html', 'index.html'),
+        new CopyWebpackPlugin([
+            { 
+                from: './app/index.html', 
+                to: 'index.html',
+                transform:function(content, path){
+                    return content.toString()
+                        .replace('scripts/bundle.js', conf.paths.output.filename)
+                        .replace('[name]', Object.keys(conf.paths.entry)[0])
+                }
+            }
+        ]),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false

@@ -17,8 +17,7 @@ console.log(env);
 const paths = { 
     default: {
         entry: {
-            app: './app/scripts/main.js',
-            'index.html': './app/index.html'
+            app: './app/scripts/main.js'
         },
         output: { 
            path: './dev',

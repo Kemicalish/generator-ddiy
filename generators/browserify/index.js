@@ -7,7 +7,8 @@ const packageJson = require('./package-json-base.js');
 const pluginOptions = {
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_CONFIG_FILE: 'browserify-env.js',
-    RUN: ['gulp', ['serve']]
+    BUILD: ['gulp', ['build']],
+    SERVE: ['gulp', ['serve']]
 };
 let _g = null;
 let _settings = conf.app;

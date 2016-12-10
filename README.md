@@ -1,16 +1,17 @@
 [![Build Status](https://travis-ci.org/Kemicalish/generator-ddiy.svg?branch=master)](https://travis-ci.org/Kemicalish/generator-ddiy)
 
 # Don't do it Yourself
-> Generator for Single Page Applications
+> Frontend Stack Generator
 
-Scaffold your SPA base project with this yeoman generator. The main goal of this project is to allow building complex SPA without relying on a framework (only libs).
+Choose your favorite tools to build a frontend stack and scaffold an SPA base project.
+The main goal of this project is to allow building complex SPA without relying on a framework (only libs).
 It's useful if you wan't to build a project that will be maintain by a team which has no experience with your favorite framework. 
 
 ## Installing / Getting started
 
-If you not already have Yeoman and gulp client, install them globally
+If you not already have Yeoman, install it globally
 ```shell
-npm install -g yo gulp-cli
+npm install -g yo
 ```
 
 then install this generator
@@ -27,16 +28,18 @@ Your app root folder should be ready in the <WORKSPACE_DIRNAME> dir (default is 
 
 To launch it later, from the <WORKSPACE_DIRNAME> directory just do:
 ```shell
-gulp serve
+npm run serve
 ```
 
 ## Features
 
-Currently it's just a tool which copy some files (with a bit of templating) to enable you start a SPA project without a framework, but just a small setup of libs and best practices.
+Choose the right tool for each of those goals:
+* Task Running `ex: gulp`
+* Bundling `ex: webpack`
+* View Rendering `ex: React`
+* Unit Testing `ex: Mocha`
 
-## Generators
-* app: build the base app, launched with `yo ddiy`   
-* components: add a component to the app with `yo ddiy:components [name]`
+Afterwards DDIY will build the stack, scaffold your app and optionally launch a local webserver
 
 ### App
 Build the base structure of the app

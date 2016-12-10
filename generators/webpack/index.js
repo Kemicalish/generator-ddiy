@@ -7,7 +7,8 @@ const pluginOptions = {
     BUNDLER_DIRNAME: conf.BUNDLER_DIRNAME,
     BUNDLER_FILNAME: 'webpack.config.js',
     BUNDLER_CONFIG_FILE: 'env.js',
-    RUN: ['npm', ['run', 'serve']]
+    BUILD: ['npm', ['run', 'build']],
+    SERVE: ['npm', ['run', 'serve']]
 };
 let _g = null;
 let _settings = conf.app;
