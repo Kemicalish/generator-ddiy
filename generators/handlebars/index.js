@@ -4,6 +4,7 @@ const core = require('../core.js');
 const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
+    LOGO_PATH:__dirname + '/logo.png'
 };
 let _g = null;
 let _settings = conf.app;
@@ -27,7 +28,9 @@ module.exports = generators.Base.extend({
         }
     },
     writing: {
-
+        write: () => {
+            return core.ViewEngine.writing(_g, PLUGIN_NAME, pluginOptions, packageJson);
+        }
     },
     install: function () {
 

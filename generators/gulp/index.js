@@ -6,7 +6,8 @@ const packageJson = require('./package-json-base.js');
 const pluginOptions = {
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_FILNAME: 'gulpfile.js',
-    TASK_CONFIG_FILE: 'conf.js'
+    TASK_CONFIG_FILE: 'conf.js',
+    LOGO_PATH:__dirname + '/logo.png'
 };
 let _g = null;
 let _settings = conf.app;
@@ -30,6 +31,9 @@ module.exports = generators.Base.extend({
         }
     },
     writing: {
+        defaultWriting: () => {
+            return core.TaskRunner.writing(_g, PLUGIN_NAME, pluginOptions, packageJson);
+        },
         taskDir: () => _g.fs.copy(
             _g.templatePath(`${pluginOptions.TASK_DIRNAME}/**/*`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.TASK_DIRNAME}`)

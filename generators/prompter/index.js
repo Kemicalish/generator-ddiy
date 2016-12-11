@@ -40,6 +40,15 @@ function toChoices(arr){
     });
 }
 
+function stackHtml(selected, choices){
+    return _.chain(choices)
+        .filter(s => s.value !== 'none')
+        .map(s => `<div id="stack-${s.value}" class="stack${s.value === selected ? ' active' : ''}" >${s.name}</div>\n`)
+        .value()
+        .join('');
+}
+
+
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
     constructor: function () {
@@ -126,11 +135,20 @@ module.exports = generators.Base.extend({
                         appName:_.camelCase(answers.appName)
                     });
 
+                
+
                 //TODO: move elsewhere
-                _settings.defaultBodyContent = _.chain(_settings)
-                    .toPairs()
-                    .map( s => `<div>${s[0]}:${s[1]}</div>\n`)
-                    .value()
+                let stack = [];
+                stack.push(['Task Runner', stackHtml(answers.TASK_RUNNER, toChoices(taskRunners))]);
+                stack.push(['Bundler', stackHtml(answers.BUNDLER, toChoices(bundlers))]);
+                stack.push(['View Engine', stackHtml(answers.VIEW_ENGINE, toChoices(viewEngines))]);
+                stack.push(['State Container', stackHtml(answers.STATE_CONTAINER, toChoices(stateContainers))]);
+
+                _settings.defaultBodyContent = stack
+                    .map(s => `<div class="stack-list">\n
+                        <div class="stack-list-title">${s[0]}</div>\n
+                        <div class="stack-list-content">${s[1]}</div>\n
+                    </div>`)
                     .join('');
 
                 _g.config.set(_settings);

@@ -7,6 +7,7 @@ const packageJson = require('./package-json-base.js');
 const pluginOptions = {
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_CONFIG_FILE: 'browserify-env.js',
+    LOGO_PATH:__dirname + '/logo.png',
     BUILD: ['gulp', ['build']],
     SERVE: ['gulp', ['serve']]
 };
@@ -32,7 +33,9 @@ module.exports = generators.Base.extend({
         }
     },
     writing: function () {   
-        if (!core.Bundler.isSelected(_g, PLUGIN_NAME)) {
+        core.Bundler.writing(_g, PLUGIN_NAME, pluginOptions, packageJson);
+
+        if (!core.Bundler.writing(_g, PLUGIN_NAME, pluginOptions, packageJson)) {
             return;
         }
 

@@ -7,6 +7,7 @@ const pluginOptions = {
     BUNDLER_DIRNAME: conf.BUNDLER_DIRNAME,
     BUNDLER_FILNAME: 'webpack.config.js',
     BUNDLER_CONFIG_FILE: 'env.js',
+    LOGO_PATH:__dirname + '/logo.png',
     BUILD: ['npm', ['run', 'build']],
     SERVE: ['npm', ['run', 'serve']]
 };
@@ -32,7 +33,8 @@ module.exports = generators.Base.extend({
         }
     },
     writing: function () {
-        if (!core.Bundler.isSelected(_g, PLUGIN_NAME)) {
+        
+        if (!core.Bundler.writing(_g, PLUGIN_NAME, pluginOptions, packageJson)) {
             return;
         }
 
