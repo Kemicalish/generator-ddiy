@@ -30,6 +30,7 @@
     "generators/gulp",
     "generators/browserify",
     "generators/handlebars",
+    "generators/react",
     "generators/components"
   ],
   "peerDependencies": {

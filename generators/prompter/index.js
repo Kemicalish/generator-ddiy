@@ -2,21 +2,43 @@
 const _ = require('lodash');
 const generators = require('yeoman-generator');
 const conf = require('../conf.js');
+const generatorTypes = require('../generator-types');
+const generatorsEnabled = require('../generators-enabled.js');
 
 let _settings = null;
 let _g = null;
 
-const taskRunners = [
-    ['none', 'none'],
-    ['gulp', 'gulp'],
-    ['grunt', 'grunt  (soon)']
-];
 
-const bundlers = [
-    ['none', 'none'],
-    ['webpack', 'webpack'],
-    ['browserify', 'browserify (require gulp)']
-];
+const noneChoice = ['none', 'none'];
+const getListFor = generatorType => _.concat(
+    noneChoice, 
+    _.filter(generatorsEnabled, gData => gData.type === generatorTypes[generatorType].id)
+        .map(gData => [gData.id, `${gData.id}${gData.requires.length > 0 ? '(require ' + gData.requires.length + gData.requires.join(',') + ')' : ''}`])
+    );
+
+const typeLabels = _.map(generatorTypes, gt => {return{
+    name:gt
+}})
+
+const choices = _.chain(generatorsEnabled)
+    .groupBy(g => g.type.id)
+    .toPairs()
+    .filter(list => list[0] !== generatorTypes.CORE.id && list[1] !== generatorTypes.PLUGIN.id )
+    .map(list => { return {
+        type:list[0],
+        typeLabel:generatorTypes[list[0]].label,
+        choices:  _.map(list[1], gData => [gData.id, `${gData.id}${gData.requires.length > 0 ? '(require ' + gData.requires.join(',') + ')' : ''}`])
+    }})
+    .map(c => { return {
+        type:'list',
+        name: c.type,
+        message: `Which ${c.typeLabel} ?`,
+        choices: toChoices(_.concat([noneChoice], c.choices)),
+        default: 'none',
+        store: true
+    }})
+    .value()
+
 
 const viewEngines = [
     ['none', 'none'],
@@ -43,7 +65,7 @@ function toChoices(arr){
 function stackHtml(selected, choices){
     return _.chain(choices)
         .filter(s => s.value !== 'none')
-        .map(s => `<div id="stack-${s.value}" class="stack${s.value === selected ? ' active' : ''}" >${s.name}</div>\n`)
+        .map(s => `<div id="stack-${s.value}" class="stack${s.value === selected ? ' active' : ''}"><div class="stack-img"></div><div class="stack-title">${s.value}</div></div>\n`)
         .value()
         .join('');
 }
@@ -58,9 +80,12 @@ module.exports = generators.Base.extend({
     initializing: function () {
         _g = this;
         this.pkg = require('../../package.json');
+
+        _g.log('choices');
+        _g.log(choices);
     },
     prompting: function () {
-        return this.prompt([{
+        return this.prompt(_.concat([{
             type: 'input',
             name: 'appName',
             message: 'Your project name',
@@ -72,7 +97,7 @@ module.exports = generators.Base.extend({
             message: 'Title of the app',
             default: 'My Great App',
             store: true
-        },{
+        }]/*[{
             type: 'list',
             name: 'BUNDLER',
             message: 'Which Module Bundler?',
@@ -107,7 +132,7 @@ module.exports = generators.Base.extend({
             choices: toChoices(unitTestEngines),
             default: 'none',
             store: true
-        }, {
+        }]*/, choices,[{
             type: 'input',
             name: 'rootTag',
             message: 'The root tag of the app',
@@ -125,7 +150,7 @@ module.exports = generators.Base.extend({
             message: 'Launch server at the end of installation?',
             default: true,
             store: true
-        }]).then(function (answers) {
+        }])).then(function (answers) {
                 _settings = Object.assign({}, 
                     answers,
                     {
@@ -133,16 +158,14 @@ module.exports = generators.Base.extend({
                         pkg_version: _g.pkg.version,
                         date: (new Date).toISOString().split('T')[0],
                         appName:_.camelCase(answers.appName)
-                    });
-
-                
+                    }); 
 
                 //TODO: move elsewhere
-                let stack = [];
-                stack.push(['Task Runner', stackHtml(answers.TASK_RUNNER, toChoices(taskRunners))]);
-                stack.push(['Bundler', stackHtml(answers.BUNDLER, toChoices(bundlers))]);
-                stack.push(['View Engine', stackHtml(answers.VIEW_ENGINE, toChoices(viewEngines))]);
-                stack.push(['State Container', stackHtml(answers.STATE_CONTAINER, toChoices(stateContainers))]);
+                let stack = choices
+                    .map(c => [c.typeLabel, stackHtml(answers[c.name], c.choices)]);
+
+                //TODO: refactor this within core.Bundler 
+                _settings.stylesheet = answers.BUNDLER === 'browserify' ? '<link rel="stylesheet" href="./styles/main.css">' : '';
 
                 _settings.defaultBodyContent = stack
                     .map(s => `<div class="stack-list">\n

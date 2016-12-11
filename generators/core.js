@@ -4,6 +4,7 @@ const conf = require('./conf.js');
 const BUNDLER_CONFIG_KEY = 'BUNDLER';
 const TASK_RUNNER_CONFIG_KEY = 'TASK_RUNNER';
 const VIEW_ENGINE_CONFIG_KEY = 'VIEW_ENGINE';
+const STATE_CONTAINER_CONFIG_KEY = 'STATE_CONTAINER';
 
 function DdiyException(value, message) {
     this.value = value;
@@ -64,7 +65,7 @@ const getModuleConfig = (configKey) => {
     return (generator, name, options, packageJson) => {
         let settings = generator.config.getAll();
         let current = generator.config.get(configKey);
-        generator.log(`${configKey.toUpperCase()}  => ${name} START`);
+        generator.log(`${configKey.toUpperCase()}  => ${name} START [CHOSEN: ${current}]`);
 
         if (current === null || typeof (current) === 'undefined') {
             generator.config.set(configKey, name);
@@ -84,30 +85,24 @@ const getModuleConfig = (configKey) => {
     }
 }
 
-
-
-const ViewEngine = {
-    config: getModuleConfig(VIEW_ENGINE_CONFIG_KEY),
-    writing:getModuleWriting(VIEW_ENGINE_CONFIG_KEY),
-    isSelected: getIsSelected(VIEW_ENGINE_CONFIG_KEY)
+function createModule(configKey){
+    return {
+        config: getModuleConfig(configKey),
+        writing:getModuleWriting(configKey),
+        isSelected: getIsSelected(configKey)
+    }
 }
 
-const TaskRunner = {
-    config: getModuleConfig(TASK_RUNNER_CONFIG_KEY),
-    writing:getModuleWriting(TASK_RUNNER_CONFIG_KEY),
-    isSelected: getIsSelected(TASK_RUNNER_CONFIG_KEY)
-}
+const ViewEngine = createModule(VIEW_ENGINE_CONFIG_KEY); 
+const Bundler = createModule(BUNDLER_CONFIG_KEY); 
+const TaskRunner = createModule(TASK_RUNNER_CONFIG_KEY); 
+const StateContainer = createModule(STATE_CONTAINER_CONFIG_KEY); 
 
-
-const Bundler = {
-    config: getModuleConfig(BUNDLER_CONFIG_KEY),
-    writing:getModuleWriting(BUNDLER_CONFIG_KEY),
-    isSelected: getIsSelected(BUNDLER_CONFIG_KEY)
-}
 
 module.exports = {
     DdiyException,
     TaskRunner,
     Bundler,
-    ViewEngine
+    ViewEngine,
+    StateContainer
 };

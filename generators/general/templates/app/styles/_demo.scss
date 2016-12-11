@@ -1,0 +1,80 @@
+.stack-list
+{
+    width:100%;
+}
+
+.stack-list-title{
+    text-transform: uppercase;
+}
+
+.stack-list-content{
+    width:100%;
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after{
+        clear:both;
+    }
+}
+
+.stack{
+    float:left;
+    width:100px;
+    box-sizing: border-box;
+    margin-right:10px;
+    margin-bottom:10px;
+    opacity:0.5;
+
+    &.active{
+        opacity:1;
+    }
+}
+
+.stack-img{
+    width:80px;
+    height:80px;
+    background:transparent no-repeat center;
+    background-size:contain;
+    border-radius: 10px;
+    overflow: hidden;
+        margin: 0 auto;
+}
+
+.stack-title{
+    height:30px;
+    line-height: 30px;
+    font-size:11px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/**
+should import a generated file with all the logo binded
+**/
+
+#stack-gulp .stack-img{
+    background-image: url('#{$img-path}demo/gulp-logo.png');
+}
+
+#stack-browserify .stack-img{
+    background-image: url('#{$img-path}demo/browserify-logo.png');
+}
+
+#stack-webpack .stack-img{
+    background-image: url('#{$img-path}demo/webpack-logo.png');
+}
+
+#stack-handlebars .stack-img{
+    background-image: url('#{$img-path}demo/handlebars-logo.png');
+}
+
+#stack-react .stack-img{
+    background-image: url('#{$img-path}demo/react-logo.png');
+}
+
+#stack-redux .stack-img{
+    background-image: url('#{$img-path}demo/redux-logo.png');
+}
