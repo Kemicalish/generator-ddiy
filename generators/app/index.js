@@ -64,6 +64,11 @@ module.exports = generators.Base.extend({
         }
     },
     install: function () {
+        let settings = _g.config.getAll();
+        if (settings.noInstall) {
+            return;
+        }
+
         _g.log('APP INSTALL');
         _settings = _g.config.getAll();
         let execDir = `${_conf.WORKSPACE_DIRNAME}`;
@@ -72,7 +77,6 @@ module.exports = generators.Base.extend({
         }).on('close', () => {
             _g.log('APP BUILD');
             _g.log(_settings);
-            
             this.spawnCommand(_settings.BUNDLER_OPTIONS.BUILD[0], _settings.BUNDLER_OPTIONS.BUILD[1], {
                 cwd: execDir
             }).on('close', () => {

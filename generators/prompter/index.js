@@ -63,25 +63,13 @@ module.exports = generators.Base.extend({
             type: 'input',
             name: 'appName',
             message: 'Your project name',
-            default: 'MyApp', // Default to current folder name
-            store: true
-        }, {
-            type: 'input',
-            name: 'appTitle',
-            message: 'Title of the app',
-            default: 'My Great App',
+            default: this.appname, // Default to current folder name
             store: true
         }], choices,[{
             type: 'input',
-            name: 'rootTag',
-            message: 'The root tag of the app',
+            name: 'rootSelector',
+            message: 'The root selector of the app (ex: #root-div)',
             default: 'body',
-            store: true
-        }, {
-            type: 'input',
-            name: 'localServerPort',
-            message: 'Development local server port',
-            default: '9010',
             store: true
         }, {
             type: 'confirm',

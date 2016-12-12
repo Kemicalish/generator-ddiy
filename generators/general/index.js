@@ -1,5 +1,6 @@
 'use strict';
 const _ = require('lodash');
+const path = require('path');
 const mkdirp = require('mkdirp');
 const core = require('../core.js');
 const generators = require('yeoman-generator');
@@ -30,8 +31,8 @@ module.exports = generators.Base.extend({
             _g.log('START WRITING GENERALS');
         },
         appDir: () => _g.fs.copy(
-            _g.templatePath(`${_settings.APP_DIRNAME}/**/*`),
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.APP_DIRNAME}`)
+            _g.templatePath(path.join(_settings.APP_DIRNAME, '**', '*')),
+            _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME))
         ),
         constants: () => _g.fs.copyTpl(
             _g.templatePath(`${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/constants.js`),

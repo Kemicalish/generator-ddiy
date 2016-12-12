@@ -20,11 +20,14 @@
      COMPONENT_DIRNAME     : 'components',
 }
 
+const devServer = {
+    PORT:"9010"
+}
+
 const promptDefaults = {
     appName:'MyApp',
     appTitle: "My Great App",
-    rootTag: "body",
-    localServerPort: "9010",
+    rootSelector: "body",
     launchServer: false,
     date: "2016-12-06",
     pkgName: "generator-ddiy",
@@ -42,6 +45,7 @@ const ignoreFiles = [
 
 module.exports = Object.assign({},
     commons,
+    {devServer:devServer},
     {prompt:promptDefaults},
     {ignoreFiles:ignoreFiles}
 );

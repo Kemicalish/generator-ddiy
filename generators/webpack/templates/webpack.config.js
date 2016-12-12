@@ -7,7 +7,7 @@ module.exports = {
     entry: conf.paths.entry,
     output: conf.paths.output,
     devServer: {
-        port:<%= localServerPort %>,
+        port:<%= devServer.PORT %>,
         inline: true //default should be true. Only use iframe if production should be within iframe too
     },
     devtool: 'source-map',

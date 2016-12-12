@@ -95,7 +95,7 @@ var plugin = {
     default: {
         js: {
             browserSync:{
-                port:<%= localServerPort %>,
+                port:<%= devServer.PORT %>,
                 baseDir:['<%= DEV_DIRNAME %>', '<%= APP_DIRNAME %>']
             },
             browserify:{
@@ -116,7 +116,7 @@ var plugin = {
     staging: {
         js: {
             browserSync:{
-                port:<%= localServerPort %>,
+                port:<%= devServer.PORT %>,
                 baseDir:['<%= STAGING_DIRNAME %>']
             },
             browserify:{
@@ -133,7 +133,7 @@ var plugin = {
     production: {
         js: {
             browserSync:{
-                port:<%= localServerPort %>,
+                port:<%= devServer.PORT %>,
                 baseDir:['<%= PROD_DIRNAME %>']
             },
             browserify:{
