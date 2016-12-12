@@ -4,14 +4,14 @@ const core = require('../core.js');
 const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
-    NAME:'gulp',
+    NAME:core.getModuleName(__dirname),
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_FILNAME: 'gulpfile.js',
     TASK_CONFIG_FILE: 'conf.js',
     LOGO_PATH:__dirname + '/logo.png'
 };
 let _g = null;
-let _settings = conf.app;
+let _settings = core.getSettings(pluginOptions);
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here

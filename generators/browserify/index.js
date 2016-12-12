@@ -5,15 +5,15 @@ const core = require('../core.js');
 const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
-    NAME:'browserify',
+    NAME:core.getModuleName(__dirname),
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_CONFIG_FILE: 'browserify-env.js',
     LOGO_PATH:__dirname + '/logo.png',
-    BUILD: ['gulp', ['build']],
-    SERVE: ['gulp', ['serve']]
+    BUILD: ['npm', ['run','build']],
+    SERVE: ['npm', ['run','serve']]
 };
 let _g = null;
-let _settings = conf.app;
+let _settings = core.getSettings(pluginOptions);
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -39,7 +39,7 @@ module.exports = generators.Base.extend({
         }
 
         _settings = _.merge({},
-            conf.app,
+            _settings,
             _g.config.getAll());
 
         _g.fs.copy(
@@ -50,7 +50,7 @@ module.exports = generators.Base.extend({
         _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.TASK_DIRNAME}/${pluginOptions.TASK_CONFIG_FILE}`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.TASK_DIRNAME}/${pluginOptions.TASK_CONFIG_FILE}`),
-            _.merge({}, conf, _settings)
+            _settings
         );
     },
     install: function () {

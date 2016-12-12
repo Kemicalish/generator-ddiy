@@ -4,7 +4,7 @@ const core = require('../core.js');
 const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
-    NAME:'redux',
+    NAME:core.getModuleName(__dirname),
     LOGO_PATH:__dirname + '/logo.png'
 };
 let _g = null;

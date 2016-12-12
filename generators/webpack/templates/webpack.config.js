@@ -1,3 +1,4 @@
+// generated on <%= date %> using <%= pkgName %> <%= pkgVersion %>
 const webpack = require('webpack');
 const conf = require('./<%= BUNDLER_DIRNAME %>/<%= BUNDLER_CONFIG_FILE %>');
 const CopyWebpackPlugin = require('copy-webpack-plugin');

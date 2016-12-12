@@ -1,13 +1,15 @@
 const _ = require('lodash');
 const generators = require('yeoman-generator');
-const conf = require('../conf.js');
+const core = require('../core.js');
 const COMPONENT_JS_FILENAME = 'component.js';
 const COMPONENT_SCSS_FILENAME = '_component.scss';
 const COMPONENT_HBS_FILENAME = 'component.hbs';
-const _constants = conf.components;
 const pluginOptions = {
-    NAME:'components'
+    NAME:core.getModuleName(__dirname),
+    tagName: 'div'
 };
+let _settings = core.getSettings(pluginOptions);
+
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -18,25 +20,27 @@ module.exports = generators.Base.extend({
         //TODO add a name.js and _name.scss files 
         //name.js with init stub  
         this.argument('componentName', { type: String, required: true });
-        _constants.name = this.componentName
+        _settings = _.merge({}, _settings, {
+            componentName:this.componentName
+        })
     },
     writing: function () {
         this.fs.copyTpl(
             this.templatePath(`${COMPONENT_JS_FILENAME}`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.COMPONENT_DIRNAME}/${_constants.name}.js`),
-            _constants
+            this.destinationPath(`${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.COMPONENT_DIRNAME}/${_settings.componentName}.js`),
+            _settings
         );
 
         this.fs.copyTpl(
             this.templatePath(`${COMPONENT_SCSS_FILENAME}`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.STYLES_DIRNAME}/${conf.COMPONENT_DIRNAME}/_${_constants.name}.scss`),
-            _constants
+            this.destinationPath(`${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.STYLES_DIRNAME}/${_settings.COMPONENT_DIRNAME}/_${_settings.componentName}.scss`),
+            _settings
         );
 
         this.fs.copyTpl(
             this.templatePath(`${COMPONENT_HBS_FILENAME}`),
-            this.destinationPath(`${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.TEMPLATES_DIRNAME}/${conf.COMPONENT_DIRNAME}/${_constants.name}.hbs`),
-            _constants
+            this.destinationPath(`${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.TEMPLATES_DIRNAME}/${_settings.COMPONENT_DIRNAME}/${_settings.componentName}.hbs`),
+            _settings
         );
     }
 });

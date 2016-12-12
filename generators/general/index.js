@@ -1,14 +1,13 @@
 'use strict';
 const _ = require('lodash');
 const mkdirp = require('mkdirp');
-
+const core = require('../core.js');
 const generators = require('yeoman-generator');
-const conf = require('../conf.js');
 let _g = null;
-let _settings = conf.app;
 const pluginOptions = {
-    NAME:'general'
+    NAME:core.getModuleName(__dirname)
 };
+let _settings = core.getSettings(pluginOptions);
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -23,8 +22,7 @@ module.exports = generators.Base.extend({
     },
     configuring : {
        writeConfig:() => {
-           let user_settings = _g.config.getAll();
-           _settings = user_settings.appName ? user_settings : _settings;
+           _settings = core.getSettings(pluginOptions, _g);
        }
     },
     writing: {
@@ -32,24 +30,24 @@ module.exports = generators.Base.extend({
             _g.log('START WRITING GENERALS');
         },
         appDir: () => _g.fs.copy(
-            _g.templatePath(`${conf.APP_DIRNAME}/**/*`),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}`)
+            _g.templatePath(`${_settings.APP_DIRNAME}/**/*`),
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.APP_DIRNAME}`)
         ),
         constants: () => _g.fs.copyTpl(
-            _g.templatePath(`${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`),
+            _g.templatePath(`${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/constants.js`),
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/constants.js`),
             _settings
         ),
         indexHTML: () => _g.fs.copyTpl(
-            _g.templatePath(`${conf.APP_DIRNAME}/index.html`),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/index.html`),
-            _.merge({}, conf, _settings)
+            _g.templatePath(`${_settings.APP_DIRNAME}/index.html`),
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.APP_DIRNAME}/index.html`),
+            _settings
         ),
         gitignore: () => _g.fs.write(
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/.gitignore`),
-            conf.ignoreFiles.join("\n")
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/.gitignore`),
+            _settings.ignoreFiles.join("\n")
         ),
-        templatesDir: () => mkdirp(_g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/${conf.TEMPLATES_DIRNAME}`), function (err) {
+        templatesDir: () => mkdirp(_g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.APP_DIRNAME}/${_settings.TEMPLATES_DIRNAME}`), function (err) {
 
         })
     }

@@ -1,11 +1,9 @@
 'use strict';
 const generators = require('yeoman-generator');
 const core = require('../core.js');
-const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
-    NAME:'webpack',
-    BUNDLER_DIRNAME: conf.BUNDLER_DIRNAME,
+    NAME:core.getModuleName(__dirname),
     BUNDLER_FILNAME: 'webpack.config.js',
     BUNDLER_CONFIG_FILE: 'env.js',
     LOGO_PATH:__dirname + '/logo.png',
@@ -13,7 +11,7 @@ const pluginOptions = {
     SERVE: ['npm', ['run', 'serve']]
 };
 let _g = null;
-let _settings = conf.app;
+let _settings = core.getSettings(pluginOptions);
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -39,18 +37,18 @@ module.exports = generators.Base.extend({
 
         _g.fs.copy(
             _g.templatePath(`${pluginOptions.BUNDLER_DIRNAME}/**/*`),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_DIRNAME}`)
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.BUNDLER_DIRNAME}`)
         );
         _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.BUNDLER_FILNAME}`),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_FILNAME}`),
-            Object.assign({}, conf, _settings, pluginOptions)
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_FILNAME}`),
+            _settings
         );
 
         _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.BUNDLER_CONFIG_FILE}`),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`),
-            Object.assign({}, conf, _settings, pluginOptions)
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`),
+            _settings
         );
     },
     install: function () {

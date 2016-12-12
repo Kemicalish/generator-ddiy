@@ -1,6 +1,7 @@
 const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
+const core = require('../generators/core.js');
 const scopeDir = '../generators/webpack';
 const pluginOptions = {
     BUNDLER_FILNAME: 'webpack.config.js',
@@ -8,9 +9,7 @@ const pluginOptions = {
     RUN: ['npm', ['run', 'serve']]
 };
 
-const conf = Object.assign({},
-    require('../generators/conf.js'),
-    pluginOptions);
+let _settings = core.getSettings(pluginOptions);
 
 
 
@@ -31,9 +30,9 @@ describe('webpack', () => {
 
   it('creates expected bundler files', () => {
     assert.file([
-        `${conf.WORKSPACE_DIRNAME}${pluginOptions.BUNDLER_FILNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.BUNDLER_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`
+        `${_settings.WORKSPACE_DIRNAME}${pluginOptions.BUNDLER_FILNAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.BUNDLER_DIRNAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`
     ]);
   });
 });

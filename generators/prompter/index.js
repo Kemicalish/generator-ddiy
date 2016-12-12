@@ -5,11 +5,11 @@ const conf = require('../conf.js');
 const generatorTypes = require('../generator-types');
 const generatorsEnabled = require('../generators-enabled.js');
 const pluginOptions = {
-    NAME:'prompter',
+    NAME:core.getModuleName(__dirname),
     LOGO_PATH:__dirname + '/logo.png'
 };
 
-let _settings = null;
+let _promptAnswers = null;
 let _g = null;
 
 
@@ -90,11 +90,11 @@ module.exports = generators.Base.extend({
             default: true,
             store: true
         }])).then(function (answers) {
-                _settings = Object.assign({}, 
+                _promptAnswers = Object.assign({}, 
                     answers,
                     {
-                        pkg_name: _g.pkg.name,
-                        pkg_version: _g.pkg.version,
+                        pkgName: _g.pkg.name,
+                        pkgVersion: _g.pkg.version,
                         date: (new Date).toISOString().split('T')[0],
                         appName:_.camelCase(answers.appName)
                     }); 
@@ -104,16 +104,16 @@ module.exports = generators.Base.extend({
                     .map(c => [c.typeLabel, stackHtml(answers[c.name], c.choices)]);
 
                 //TODO: refactor this within core.Bundler 
-                _settings.stylesheet = answers.BUNDLER === 'browserify' ? '<link rel="stylesheet" href="./styles/main.css">' : '';
+                _promptAnswers.stylesheet = answers.BUNDLER === 'browserify' ? '<link rel="stylesheet" href="./styles/main.css">' : '';
 
-                _settings.defaultBodyContent = stack
+                _promptAnswers.defaultBodyContent = stack
                     .map(s => `<div class="stack-list">\n
                         <div class="stack-list-title">${s[0]}</div>\n
                         <div class="stack-list-content">${s[1]}</div>\n
                     </div>`)
                     .join('');
 
-                _g.config.set(_settings);
+                _g.config.set('prompt', _promptAnswers);
                 _g.config.save();
 
         }.bind(this));

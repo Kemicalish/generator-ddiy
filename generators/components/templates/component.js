@@ -1,9 +1,9 @@
 const constants    = require('../constants');
-const tpl          = require('../../templates/components/<%= name %>.hbs');
+const tpl          = require('../../templates/components/<%= componentName %>.hbs');
 const Handlebars   = require('hbsfy/runtime');
 const $			   = require('jquery');
 
-Handlebars.registerPartial('partial-<%= name %>', require('../../templates/components/<%= name %>.hbs'));
+Handlebars.registerPartial('partial-<%= componentName %>', require('../../templates/components/<%= componentName %>.hbs'));
 
 var renderIn = selector => context => new Promise((resolve, reject)=>{
     $(selector).html(tpl(context));

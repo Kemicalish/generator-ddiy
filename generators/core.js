@@ -25,6 +25,10 @@ const PackageJson = {
     }
 };
 
+const getSettings = (pluginOptions, generator) => _.merge({}, conf, conf.prompt, pluginOptions, ( generator ? generator.config.getAll() : {}) );
+
+const getModuleName = dirname => dirname.split('\\').slice(-1)[0];
+
 const getIsSelected = (configKey) => {
     return (generator, name) => {
         let settings = generator.config.getAll();
@@ -74,7 +78,7 @@ const getModuleConfig = (configKey) => {
             return false;
         }
         let name = options.NAME;
-        
+
         let settings = generator.config.getAll();
         let current = generator.config.get(configKey);
         generator.log(`${configKey.toUpperCase()}  => ${name} START [CHOSEN: ${current}]`);
@@ -112,6 +116,8 @@ const StateContainer = createModule(STATE_CONTAINER_CONFIG_KEY);
 
 
 module.exports = {
+    getSettings,
+    getModuleName,
     DdiyException,
     TaskRunner,
     Bundler,
