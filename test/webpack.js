@@ -11,8 +11,6 @@ const pluginOptions = {
 
 let _settings = core.getSettings(pluginOptions);
 
-
-
 describe('webpack', () => {
   before(function (done) {
     helpers.run(path.join(__dirname, scopeDir))

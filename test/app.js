@@ -3,7 +3,8 @@ const _ = require('lodash');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 const scopeDir = '../generators/app';
-const conf = require('../generators/conf.js');
+const core = require('../generators/core.js');
+let _settings = core.getSettings({});
 const generatorsAvailable = require('../generators/generators-available.js');
 const generatorsInjected = generatorsAvailable.map(gData => [helpers.createDummyGenerator(), `ddiy:${gData.id}`]);
 
@@ -25,7 +26,7 @@ describe('app', () => {
 
   it('creates package.json file', () => {
     assert.file([
-        `${conf.WORKSPACE_DIRNAME}package.json`
+        `${_settings.WORKSPACE_DIRNAME}package.json`
     ]);
   });
 

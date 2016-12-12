@@ -7,9 +7,8 @@ const pluginOptions = {
     TASK_CONFIG_FILE: 'conf.js'
 };
 
-const conf = Object.assign({},
-    require('../generators/conf.js'),
-    pluginOptions);
+const core = require('../generators/core.js');
+let _settings = core.getSettings(pluginOptions);
 
 
 const exampleFilename = 'info.js';
@@ -31,9 +30,9 @@ describe('gulp', () => {
 
   it('creates expected tasks files', () => {
     assert.file([
-        `${conf.WORKSPACE_DIRNAME}gulpfile.js`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${exampleFilename}`,
+        `${_settings.WORKSPACE_DIRNAME}gulpfile.js`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${exampleFilename}`,
     ]);
   });
 
@@ -42,7 +41,7 @@ describe('gulp', () => {
         [
         'info'
         ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${exampleFilename}`, 
+        assert.fileContent(`${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${exampleFilename}`, 
             'gulp.task(\'' + task);
         });
     });

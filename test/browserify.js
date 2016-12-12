@@ -7,10 +7,8 @@ const pluginOptions = {
     RUN: ['gulp', ['serve']]
 };
 
-const conf = Object.assign({},
-    require('../generators/conf.js'),
-    pluginOptions);
-
+const core = require('../generators/core.js');
+let _settings = core.getSettings(pluginOptions);
 
 const mainTaskFilename = 'browserify-main.js';
 const scriptsTaskFilename = 'browserify-scripts.js';
@@ -34,11 +32,11 @@ describe('browserify', () => {
 
   it('creates expected tasks files', () => {
     assert.file([
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${mainTaskFilename}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${scriptsTaskFilename}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${stylesTaskFilename}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${mainTaskFilename}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${scriptsTaskFilename}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${stylesTaskFilename}`,
     ]);
   });
 
@@ -52,7 +50,7 @@ describe('browserify', () => {
         'fonts',
         'build'
         ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${mainTaskFilename}`, 
+        assert.fileContent(`${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${mainTaskFilename}`, 
             'gulp.task(\'' + task);
         });
     });
@@ -61,7 +59,7 @@ describe('browserify', () => {
         [
         'scripts'
         ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${scriptsTaskFilename}`, 
+        assert.fileContent(`${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${scriptsTaskFilename}`, 
             'gulp.task(\'' + task);
         });
     });
@@ -70,7 +68,7 @@ describe('browserify', () => {
         [
         'styles'
         ].forEach((task) => {
-        assert.fileContent(`${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${stylesTaskFilename}`, 
+        assert.fileContent(`${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${stylesTaskFilename}`, 
             'gulp.task(\'' + task);
         });
     });
@@ -79,7 +77,7 @@ describe('browserify', () => {
         mainTaskFilename,
         scriptsTaskFilename,
         stylesTaskFilename
-    ].map(filename => `${conf.WORKSPACE_DIRNAME}${conf.TASK_DIRNAME}/${filename}`)
+    ].map(filename => `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${filename}`)
     .forEach((file) => {
          it(`${file} should require ${pluginOptions.BUNDLER_CONFIG_FILE}`, () => {
              assert.fileContent(`${file}`, 

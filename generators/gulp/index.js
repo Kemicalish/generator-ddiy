@@ -1,13 +1,10 @@
 'use strict';
 const generators = require('yeoman-generator');
 const core = require('../core.js');
-const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
     NAME:core.getModuleName(__dirname),
-    TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_FILNAME: 'gulpfile.js',
-    TASK_CONFIG_FILE: 'conf.js',
     LOGO_PATH:__dirname + '/logo.png'
 };
 let _g = null;
@@ -34,12 +31,12 @@ module.exports = generators.Base.extend({
             return core.TaskRunner.writing(_g, pluginOptions, packageJson);
         },
         taskDir: () => _g.fs.copy(
-            _g.templatePath(`${pluginOptions.TASK_DIRNAME}/**/*`),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.TASK_DIRNAME}`)
+            _g.templatePath(`${_settings.TASK_DIRNAME}/**/*`),
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.TASK_DIRNAME}`)
         ),
         gulpfile: () => _g.fs.copyTpl(
-            _g.templatePath(`${pluginOptions.TASK_FILNAME}`),
-            _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.TASK_FILNAME}`),
+            _g.templatePath(`${_settings.TASK_FILNAME}`),
+            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.TASK_FILNAME}`),
             _settings
         )
     },

@@ -1,14 +1,13 @@
 'use strict';
 const _ = require('lodash');
 const generators = require('yeoman-generator');
-const conf = require('../conf.js');
 const generatorTypes = require('../generator-types');
 const generatorsEnabled = require('../generators-enabled.js');
 const pluginOptions = {
     NAME:core.getModuleName(__dirname),
     LOGO_PATH:__dirname + '/logo.png'
 };
-
+let _settings = core.getSettings(pluginOptions);
 let _promptAnswers = null;
 let _g = null;
 

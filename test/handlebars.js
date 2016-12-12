@@ -6,9 +6,8 @@ const pluginOptions = {
 
 };
 
-const conf = Object.assign({},
-    require('../generators/conf.js'),
-    pluginOptions);
+const core = require('../generators/core.js');
+let _settings = core.getSettings(pluginOptions);
 
 describe('handlebars', () => {
   before(function (done) {

@@ -2,7 +2,11 @@ const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 const scopeDir = '../generators/general';
-const conf = require('../generators/conf.js');
+const pluginOptions = {
+
+};
+const core = require('../generators/core.js');
+let _settings = core.getSettings(pluginOptions);
 
 describe('general', () => {
   before(function (done) {
@@ -22,16 +26,16 @@ describe('general', () => {
 
   it('creates expected app files', () => {
     assert.file([
-        `${conf.WORKSPACE_DIRNAME}.gitignore`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/device.js`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/${conf.CORE_DIRNAME}/router.js`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/constants.js`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/main.js`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.STYLES_DIRNAME}`,
-        `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/index.html`,
+        `${_settings.WORKSPACE_DIRNAME}.gitignore`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.CORE_DIRNAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.CORE_DIRNAME}/device.js`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.CORE_DIRNAME}/router.js`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/constants.js`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.JS_ENTRY_FILENAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.STYLES_DIRNAME}`,
+        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/index.html`,
     ]);
   });
 });

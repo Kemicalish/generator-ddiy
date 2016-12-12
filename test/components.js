@@ -4,12 +4,17 @@ const _ = require('lodash');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 const scopeDir = '../generators/components';
-const conf = require('../generators/conf.js');
 const testCompName = 'my-comp';
 
-const jsFilePath = `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.SCRIPTS_DIRNAME}/components/${testCompName}.js`;
-const sccsFilePath = `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.STYLES_DIRNAME}/components/_${testCompName}.scss`;
-const hbsFilePath = `${conf.WORKSPACE_DIRNAME}${conf.APP_DIRNAME}/${conf.TEMPLATES_DIRNAME}/components/${testCompName}.hbs`;
+const pluginOptions = {
+    tagName: 'div'
+};
+const core = require('../generators/core.js');
+let _settings = core.getSettings(pluginOptions);
+
+const jsFilePath = `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/components/${testCompName}.js`;
+const sccsFilePath = `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.STYLES_DIRNAME}/components/_${testCompName}.scss`;
+const hbsFilePath = `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.TEMPLATES_DIRNAME}/components/${testCompName}.hbs`;
 
 let _essentialVars = ['init', 'renderIn'];
 

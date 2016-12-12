@@ -8,7 +8,7 @@ const pluginOptions = {
     LOGO_PATH:__dirname + '/logo.png'
 };
 let _g = null;
-let _settings = conf.app;
+let _settings = core.getSettings(pluginOptions);
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
