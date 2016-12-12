@@ -39,23 +39,6 @@ const choices = _.chain(generatorsEnabled)
     }})
     .value()
 
-
-const viewEngines = [
-    ['none', 'none'],
-    ['react', 'react  (soon)'],
-    ['handlebars', 'handlebars']
-]
-
-const stateContainers = [
-    ['none', 'none'],
-    ['redux', 'redux (require react)  (soon)']
-];
-
-const unitTestEngines = [
-    ['none', 'none'],
-    ['mocha', 'mocha (soon)']
-];
-
 function toChoices(arr){
     return arr.map(b => {
         return {name: b[1], value: b[0]};
@@ -97,42 +80,7 @@ module.exports = generators.Base.extend({
             message: 'Title of the app',
             default: 'My Great App',
             store: true
-        }]/*[{
-            type: 'list',
-            name: 'BUNDLER',
-            message: 'Which Module Bundler?',
-            choices: toChoices(bundlers),
-            default: 'webpack',
-            store: true
-        },{
-            type: 'list',
-            name: 'TASK_RUNNER',
-            message: 'Which Task Runner?',
-            choices: toChoices(taskRunners),
-            default: 'gulp',
-            store: true
-        },{
-            type: 'list',
-            name: 'VIEW_ENGINE',
-            message: 'Which View "Engine"?',
-            choices: toChoices(viewEngines),
-            default: 'react',
-            store: true
-        },{
-            type: 'list',
-            name: 'STATE_CONTAINER',
-            message: 'Which State Container?',
-            choices: toChoices(stateContainers),
-            default: 'none',
-            store: true
-        },{
-            type: 'list',
-            name: 'UNIT_TEST_ENGINE',
-            message: 'Which Unit Test Engine?',
-            choices: toChoices(unitTestEngines),
-            default: 'none',
-            store: true
-        }]*/, choices,[{
+        }], choices,[{
             type: 'input',
             name: 'rootTag',
             message: 'The root tag of the app',

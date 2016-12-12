@@ -1,23 +1,20 @@
 const path = require('path');
+const _ = require('lodash');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 const scopeDir = '../generators/app';
 const conf = require('../generators/conf.js');
+const generatorsAvailable = require('../generators/generators-available.js');
+const generatorsInjected = generatorsAvailable.map(gData => [helpers.createDummyGenerator(), `ddiy:${gData.id}`]);
 
 describe('app', () => {
   before(function (done) {
     helpers.run(path.join(__dirname, scopeDir))
       .withPrompts({features: []})
-      .withGenerators([
-        [helpers.createDummyGenerator(), 'ddiy:general'],
-        [helpers.createDummyGenerator(), 'ddiy:prompter'],
-        [helpers.createDummyGenerator(), 'ddiy:webpack'],
-        [helpers.createDummyGenerator(), 'ddiy:gulp'],
-        [helpers.createDummyGenerator(), 'ddiy:browserify'],
-        [helpers.createDummyGenerator(), 'ddiy:handlebars'],
-        [helpers.createDummyGenerator(), 'ddiy:react'],
-        [helpers.createDummyGenerator(), 'mocha:app']
-      ])
+      .withGenerators(_.concat(
+          generatorsInjected,
+          [[helpers.createDummyGenerator(), 'mocha:app']]
+        ))
       .on('end', done);
   });
 

@@ -53,7 +53,7 @@ module.exports = generators.Base.extend({
         _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.TASK_DIRNAME}/${pluginOptions.TASK_CONFIG_FILE}`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.TASK_DIRNAME}/${pluginOptions.TASK_CONFIG_FILE}`),
-            _settings
+            _.merge({}, conf, _settings)
         );
     },
     install: function () {

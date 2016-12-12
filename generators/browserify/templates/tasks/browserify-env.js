@@ -6,20 +6,20 @@ console.log(env);
 var paths = { 
     default: {
         src: { 
-            js: 'app/scripts/main.js', //use to target js entryPoint
-            scripts:'app/scripts/**/*', //use to watch / grab all scripts files
-            images:'app/images/**/*',
-            fonts:'app/fonts/**/*',
-            templates:'app/templates/**/*.hbs',
-            html: 'app/*.html', 
-            css: 'app/styles/*.scss' 
+            js: '<%= APP_DIRNAME %>/<%= SCRIPTS_DIRNAME %>/<%= JS_ENTRY_FILENAME %>', //use to target js entryPoint
+            scripts:'<%= APP_DIRNAME %>/<%= SCRIPTS_DIRNAME %>/**/*', //use to watch / grab all scripts files
+            images:'<%= APP_DIRNAME %>/images/**/*',
+            fonts:'<%= APP_DIRNAME %>/fonts/**/*',
+            templates:'<%= APP_DIRNAME %>/templates/**/*.hbs',
+            html: '<%= APP_DIRNAME %>/*.html', 
+            css: '<%= APP_DIRNAME %>/styles/*.scss' 
         }, 
         dest: { 
-            js: 'dev/scripts', 
-            constants: 'dev/', 
-            html: 'dev/', 
-            css: 'dev/styles',
-            images:'dev/images',
+            js: '<%= DEV_DIRNAME %>/<%= SCRIPTS_DIRNAME %>', 
+            constants: '<%= DEV_DIRNAME %>/', 
+            html: '<%= DEV_DIRNAME %>/', 
+            css: '<%= DEV_DIRNAME %>/styles',
+            images:'<%= DEV_DIRNAME %>/images',
         } 
     },
     development: {
@@ -27,19 +27,19 @@ var paths = {
     },
     staging: {
         dest: { 
-            js: 'staging/scripts', 
-            constants: 'staging/', 
-            html: 'staging/', 
-            css: 'staging/styles',
-            images:'staging/images',
+            js: '<%= STAGING_DIRNAME %>/<%= SCRIPTS_DIRNAME %>', 
+            constants: '<%= STAGING_DIRNAME %>/', 
+            html: '<%= STAGING_DIRNAME %>/', 
+            css: '<%= STAGING_DIRNAME %>/styles',
+            images:'<%= STAGING_DIRNAME %>/images',
         } 
     },
     production: {
         dest: { 
-            js: 'build/scripts', 
-            constants: 'build/', 
-            html: 'build/', 
-            css: 'build/styles'
+            js: '<%= PROD_DIRNAME %>/<%= SCRIPTS_DIRNAME %>', 
+            constants: '<%= PROD_DIRNAME %>/', 
+            html: '<%= PROD_DIRNAME %>/', 
+            css: '<%= PROD_DIRNAME %>/styles'
         }
     }
 };
@@ -96,7 +96,7 @@ var plugin = {
         js: {
             browserSync:{
                 port:<%= localServerPort %>,
-                baseDir:['dev', 'app']
+                baseDir:['<%= DEV_DIRNAME %>', '<%= APP_DIRNAME %>']
             },
             browserify:{
                 debug:true,
@@ -117,7 +117,7 @@ var plugin = {
         js: {
             browserSync:{
                 port:<%= localServerPort %>,
-                baseDir:['staging']
+                baseDir:['<%= STAGING_DIRNAME %>']
             },
             browserify:{
                 debug:false,
@@ -134,7 +134,7 @@ var plugin = {
         js: {
             browserSync:{
                 port:<%= localServerPort %>,
-                baseDir:['build']
+                baseDir:['<%= PROD_DIRNAME %>']
             },
             browserify:{
                 debug:false,

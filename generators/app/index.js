@@ -11,6 +11,13 @@ let _settings = _conf.app;
 
 const generatorEnabled = require('../generators-enabled.js');
 
+const createCompose = generator => gData => { 
+    _g.log(`COMPOSE WITH ${gData.id.toUpperCase()}`);
+    _g.composeWith(`ddiy:${gData.id}`, {
+        local: require.resolve(`../${gData.id}`)
+    });
+}
+
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
     constructor: function () {
@@ -23,51 +30,7 @@ module.exports = generators.Base.extend({
         _g = this;
         this.pkg = require('../../package.json');
         _g.log('START INIT');
-
-        _.each(generatorEnabled, g => _g.log(g.id) );
-
-        
-        _.each(generatorEnabled, gData => _g.composeWith(`ddiy:${gData.id}`, {
-            local: require.resolve(`../${gData.id}`)
-        }));
-
-        /*
-        _g.composeWith('ddiy:prompter', {
-            local: require.resolve('../prompter')
-        });
-
-        _g.composeWith('ddiy:general', {
-            local: require.resolve('../general')
-        });
-
-        //TASK RUNNERS
-        _g.composeWith('ddiy:gulp', {
-            local: require.resolve('../gulp')
-        });
-        
-
-        //BUNDLERS
-        _g.composeWith('ddiy:webpack', {
-            local: require.resolve('../webpack')
-        });
-
-        _g.composeWith('ddiy:browserify', {
-            local: require.resolve('../browserify')
-        });
-
-        //VIEW ENGINES
-        _g.composeWith('ddiy:handlebars', {
-            local: require.resolve('../handlebars')
-        });
-
-        _g.composeWith('ddiy:react', {
-            local: require.resolve('../react')
-        });
-
-        //STATE CONTAINER
-        _g.composeWith('ddiy:redux', {
-            local: require.resolve('../redux')
-        });*/
+        _.each(generatorEnabled, createCompose(_g));
     },
     prompting: {
         

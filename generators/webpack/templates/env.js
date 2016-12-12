@@ -17,12 +17,12 @@ console.log(env);
 const paths = { 
     default: {
         entry: {
-            app: './app/scripts/main.js'
+            app: './<%= APP_DIRNAME %>/<%= SCRIPTS_DIRNAME %>/<%= JS_ENTRY_FILENAME %>'
         },
         output: { 
-           path: './dev',
+           path: './<%= DEV_DIRNAME %>',
             //publicPath: '/dev/',
-            filename: '[name].dev.bundle.js'
+            filename: '[name].<%= DEV_DIRNAME %>.bundle.js'
         } 
     },
     development: {
@@ -30,14 +30,14 @@ const paths = {
     },
     staging: {
         output: { 
-           path: './staging',
+           path: './<%= STAGING_DIRNAME %>',
             //publicPath: '/staging/',
-            filename: '[name].staging.bundle.js'
+            filename: '[name].<%= STAGING_DIRNAME %>.bundle.js'
         } 
     },
     production: {
         output: { 
-           path: './prod',
+           path: './<%= PROD_DIRNAME %>',
            //publicPath: '/prod/',
            filename: '[name].bundle.js'
         } 

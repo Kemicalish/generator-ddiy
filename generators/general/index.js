@@ -40,7 +40,7 @@ module.exports = generators.Base.extend({
         indexHTML: () => _g.fs.copyTpl(
             _g.templatePath(`${conf.APP_DIRNAME}/index.html`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/index.html`),
-            _settings
+            _.merge({}, conf, _settings)
         ),
         gitignore: () => _g.fs.write(
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/.gitignore`),

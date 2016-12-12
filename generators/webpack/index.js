@@ -51,7 +51,7 @@ module.exports = generators.Base.extend({
         _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.BUNDLER_CONFIG_FILE}`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`),
-            Object.assign({}, _settings, pluginOptions)
+            Object.assign({}, conf, _settings, pluginOptions)
         );
     },
     install: function () {

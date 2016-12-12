@@ -6,6 +6,7 @@ module.exports = {
     entry: conf.paths.entry,
     output: conf.paths.output,
     devServer: {
+        port:<%= localServerPort %>,
         inline: true //default should be true. Only use iframe if production should be within iframe too
     },
     devtool: 'source-map',
@@ -36,11 +37,11 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             { 
-                from: './app/index.html', 
+                from: './<%= APP_DIRNAME %>/index.html', 
                 to: 'index.html',
                 transform:function(content, path){
                     return content.toString()
-                        .replace('scripts/bundle.js', conf.paths.output.filename)
+                        .replace('<%= SCRIPTS_DIRNAME %>/<%= JS_ENTRY_FILENAME %>', conf.paths.output.filename)
                         .replace('[name]', Object.keys(conf.paths.entry)[0])
                 }
             }
