@@ -1,5 +1,6 @@
 'use strict';
 const _ = require('lodash');
+const core = require('../core.js');
 const generators = require('yeoman-generator');
 const generatorTypes = require('../generator-types');
 const generatorsEnabled = require('../generators-enabled.js');

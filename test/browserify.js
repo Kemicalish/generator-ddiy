@@ -19,8 +19,7 @@ describe('browserify', () => {
     helpers.run(path.join(__dirname, scopeDir))
       .withPrompts({features: []})
       .withGenerators([
-        [helpers.createDummyGenerator(), 'ddiy:gulp'],
-        [helpers.createDummyGenerator(), 'mocha:browserify']
+        [helpers.createDummyGenerator(), 'ddiy:gulp']
       ])
       .on('end', done);
   });

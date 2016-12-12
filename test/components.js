@@ -23,7 +23,6 @@ describe('components', () => {
         helpers.run(path.join(__dirname, scopeDir))
             .withArguments([testCompName])
             .withGenerators([
-                [helpers.createDummyGenerator(), 'mocha:components']
             ])
             .on('end', done);
     });

@@ -13,8 +13,7 @@ describe('app', () => {
     helpers.run(path.join(__dirname, scopeDir))
       .withPrompts({features: []})
       .withGenerators(_.concat(
-          generatorsInjected,
-          [[helpers.createDummyGenerator(), 'mocha:app']]
+          generatorsInjected
         ))
       .on('end', done);
   });

@@ -18,7 +18,6 @@ describe('gulp', () => {
     helpers.run(path.join(__dirname, scopeDir))
       .withPrompts({features: []})
       .withGenerators([
-        [helpers.createDummyGenerator(), 'mocha:gulp']
       ])
       .on('end', done);
   });

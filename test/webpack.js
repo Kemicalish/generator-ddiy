@@ -16,7 +16,6 @@ describe('webpack', () => {
     helpers.run(path.join(__dirname, scopeDir))
       .withPrompts({features: []})
       .withGenerators([
-        [helpers.createDummyGenerator(), 'mocha:webpack']
       ])
       .on('end', done);
   });

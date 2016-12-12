@@ -13,8 +13,6 @@ describe('general', () => {
     helpers.run(path.join(__dirname, scopeDir))
       .withPrompts({features: []})
       .withGenerators([
-         [helpers.createDummyGenerator(), 'mocha:general'],
-
       ])
       .on('end', done);
   });
