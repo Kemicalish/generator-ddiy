@@ -4,6 +4,7 @@ const core = require('../core.js');
 const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
+    NAME:'gulp',
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_FILNAME: 'gulpfile.js',
     TASK_CONFIG_FILE: 'conf.js',
@@ -11,8 +12,6 @@ const pluginOptions = {
 };
 let _g = null;
 let _settings = conf.app;
-
-const PLUGIN_NAME = 'gulp';
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -27,12 +26,12 @@ module.exports = generators.Base.extend({
     },
     configuring: {
         writeConfig: () => {
-            return core.TaskRunner.config(_g, PLUGIN_NAME, pluginOptions, packageJson);
+            return core.TaskRunner.config(_g, pluginOptions, packageJson);
         }
     },
     writing: {
         defaultWriting: () => {
-            return core.TaskRunner.writing(_g, PLUGIN_NAME, pluginOptions, packageJson);
+            return core.TaskRunner.writing(_g, pluginOptions, packageJson);
         },
         taskDir: () => _g.fs.copy(
             _g.templatePath(`${pluginOptions.TASK_DIRNAME}/**/*`),

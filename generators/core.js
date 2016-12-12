@@ -44,9 +44,15 @@ const copylogo = (generator, conf, name, options) => {
 }
 
 const getModuleWriting = (configKey) => {
-    return (generator, name, options, packageJson) => {
+    return (generator, options, packageJson) => {
+        if(!options.NAME){
+            generator.log.error('Generator Name is not defined');
+            return false;
+        }
+        let name = options.NAME;
+
         //Always done
-        generator.log(`${name.toUpperCase()} ALWAYS WRITING`)
+        generator.log(`${configKey.toUpperCase()}  => ${name.toUpperCase()} ALWAYS WRITING`)
 
         copylogo(generator, conf, name, options);
 
@@ -55,14 +61,20 @@ const getModuleWriting = (configKey) => {
         }
 
         //Done only if selected
-        generator.log(`${name.toUpperCase()} SELECTED WRITING`)
+        generator.log(`${configKey.toUpperCase()}  => ${name.toUpperCase()} SELECTED WRITING`)
 
         return true;
     }
 }
 
 const getModuleConfig = (configKey) => {
-    return (generator, name, options, packageJson) => {
+    return (generator, options, packageJson) => {
+        if(!options.NAME){
+            generator.log.error('Generator Name is not defined');
+            return false;
+        }
+        let name = options.NAME;
+        
         let settings = generator.config.getAll();
         let current = generator.config.get(configKey);
         generator.log(`${configKey.toUpperCase()}  => ${name} START [CHOSEN: ${current}]`);

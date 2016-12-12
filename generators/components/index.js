@@ -5,6 +5,9 @@ const COMPONENT_JS_FILENAME = 'component.js';
 const COMPONENT_SCSS_FILENAME = '_component.scss';
 const COMPONENT_HBS_FILENAME = 'component.hbs';
 const _constants = conf.components;
+const pluginOptions = {
+    NAME:'components'
+};
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here

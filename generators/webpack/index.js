@@ -4,6 +4,7 @@ const core = require('../core.js');
 const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
+    NAME:'webpack',
     BUNDLER_DIRNAME: conf.BUNDLER_DIRNAME,
     BUNDLER_FILNAME: 'webpack.config.js',
     BUNDLER_CONFIG_FILE: 'env.js',
@@ -13,8 +14,6 @@ const pluginOptions = {
 };
 let _g = null;
 let _settings = conf.app;
-
-const PLUGIN_NAME = 'webpack';
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -29,12 +28,12 @@ module.exports = generators.Base.extend({
     },
     configuring: {
         writeConfig: () => {
-            return core.Bundler.config(_g, PLUGIN_NAME, pluginOptions, packageJson);
+            return core.Bundler.config(_g, pluginOptions, packageJson);
         }
     },
     writing: function () {
         
-        if (!core.Bundler.writing(_g, PLUGIN_NAME, pluginOptions, packageJson)) {
+        if (!core.Bundler.writing(_g, pluginOptions, packageJson)) {
             return;
         }
 
@@ -45,7 +44,7 @@ module.exports = generators.Base.extend({
         _g.fs.copyTpl(
             _g.templatePath(`${pluginOptions.BUNDLER_FILNAME}`),
             _g.destinationPath(`${conf.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_FILNAME}`),
-            Object.assign({}, _settings, pluginOptions)
+            Object.assign({}, conf, _settings, pluginOptions)
         );
 
         _g.fs.copyTpl(

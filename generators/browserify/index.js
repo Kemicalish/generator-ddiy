@@ -5,6 +5,7 @@ const core = require('../core.js');
 const conf = require('../conf.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
+    NAME:'browserify',
     TASK_DIRNAME: conf.TASK_DIRNAME,
     TASK_CONFIG_FILE: 'browserify-env.js',
     LOGO_PATH:__dirname + '/logo.png',
@@ -13,8 +14,6 @@ const pluginOptions = {
 };
 let _g = null;
 let _settings = conf.app;
-
-const PLUGIN_NAME = 'browserify';
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
@@ -29,21 +28,19 @@ module.exports = generators.Base.extend({
     },
     configuring: {
         writeConfig: () => {
-            return core.Bundler.config(_g, PLUGIN_NAME, pluginOptions, packageJson);
+            return core.Bundler.config(_g, pluginOptions, packageJson);
         }
     },
     writing: function () {   
-        core.Bundler.writing(_g, PLUGIN_NAME, pluginOptions, packageJson);
+        core.Bundler.writing(_g, pluginOptions, packageJson);
 
-        if (!core.Bundler.writing(_g, PLUGIN_NAME, pluginOptions, packageJson)) {
+        if (!core.Bundler.writing(_g, pluginOptions, packageJson)) {
             return;
         }
 
         _settings = _.merge({},
             conf.app,
             _g.config.getAll());
-
-        _g.log('BROWSERIFY WRITING');
 
         _g.fs.copy(
             _g.templatePath(`${pluginOptions.TASK_DIRNAME}/**/*`),

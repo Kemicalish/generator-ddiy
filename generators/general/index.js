@@ -6,6 +6,9 @@ const generators = require('yeoman-generator');
 const conf = require('../conf.js');
 let _g = null;
 let _settings = conf.app;
+const pluginOptions = {
+    NAME:'general'
+};
 
 module.exports = generators.Base.extend({
     // The name `constructor` is important here

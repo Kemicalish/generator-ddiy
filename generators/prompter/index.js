@@ -4,22 +4,16 @@ const generators = require('yeoman-generator');
 const conf = require('../conf.js');
 const generatorTypes = require('../generator-types');
 const generatorsEnabled = require('../generators-enabled.js');
+const pluginOptions = {
+    NAME:'prompter',
+    LOGO_PATH:__dirname + '/logo.png'
+};
 
 let _settings = null;
 let _g = null;
 
 
 const noneChoice = ['none', 'none'];
-const getListFor = generatorType => _.concat(
-    noneChoice, 
-    _.filter(generatorsEnabled, gData => gData.type === generatorTypes[generatorType].id)
-        .map(gData => [gData.id, `${gData.id}${gData.requires.length > 0 ? '(require ' + gData.requires.length + gData.requires.join(',') + ')' : ''}`])
-    );
-
-const typeLabels = _.map(generatorTypes, gt => {return{
-    name:gt
-}})
-
 const choices = _.chain(generatorsEnabled)
     .groupBy(g => g.type.id)
     .toPairs()
@@ -63,9 +57,6 @@ module.exports = generators.Base.extend({
     initializing: function () {
         _g = this;
         this.pkg = require('../../package.json');
-
-        _g.log('choices');
-        _g.log(choices);
     },
     prompting: function () {
         return this.prompt(_.concat([{
