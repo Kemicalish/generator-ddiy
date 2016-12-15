@@ -29,9 +29,9 @@ describe('gulp', () => {
 
   it('creates expected tasks files', () => {
     assert.file([
-        `${_settings.WORKSPACE_DIRNAME}gulpfile.js`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${exampleFilename}`,
+        path.join(_settings.WORKSPACE_DIRNAME, 'gulpfile.js'),
+        path.join(_settings.WORKSPACE_DIRNAME, _settings.TASK_DIRNAME),
+        path.join(_settings.WORKSPACE_DIRNAME, _settings.TASK_DIRNAME, exampleFilename),
     ]);
   });
 
@@ -40,7 +40,7 @@ describe('gulp', () => {
         [
         'info'
         ].forEach((task) => {
-        assert.fileContent(`${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${exampleFilename}`, 
+        assert.fileContent(path.join(_settings.WORKSPACE_DIRNAME, _settings.TASK_DIRNAME, exampleFilename), 
             'gulp.task(\'' + task);
         });
     });

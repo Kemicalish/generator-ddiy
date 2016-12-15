@@ -1,5 +1,6 @@
 'use strict';
 const generators = require('yeoman-generator');
+const path = require('path');
 const core = require('../core.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
@@ -31,12 +32,12 @@ module.exports = generators.Base.extend({
             return core.TaskRunner.writing(_g, pluginOptions, packageJson);
         },
         taskDir: () => _g.fs.copy(
-            _g.templatePath(`${_settings.TASK_DIRNAME}/**/*`),
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.TASK_DIRNAME}`)
+            _g.templatePath(path.join(_settings.TASK_DIRNAME, '**', '*')),
+            _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, _settings.TASK_DIRNAME))
         ),
         gulpfile: () => _g.fs.copyTpl(
-            _g.templatePath(`${_settings.TASK_FILNAME}`),
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.TASK_FILNAME}`),
+            _g.templatePath(path.join(_settings.TASK_FILNAME)),
+            _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, _settings.TASK_FILNAME)),
             _settings
         )
     },

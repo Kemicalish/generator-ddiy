@@ -1,7 +1,7 @@
 'use strict';
 require('babel-polyfill');
 const _ = require('lodash');
-
+const path = require('path');
 const generators = require('yeoman-generator');
 const _conf = require('../conf.js');
 const packageJson = require('../package-json-base.js');
@@ -14,7 +14,7 @@ const generatorEnabled = require('../generators-enabled.js');
 const createCompose = generator => gData => { 
     _g.log(`COMPOSE WITH ${gData.id.toUpperCase()}`);
     _g.composeWith(`ddiy:${gData.id}`, {
-        local: require.resolve(`../${gData.id}`)
+        local: require.resolve(path.join('..', gData.id))
     });
 }
 
@@ -47,13 +47,13 @@ module.exports = generators.Base.extend({
         },
         readme: () => _g.fs.copy( 
             _g.templatePath('readme.md'),
-            _g.destinationPath(`${_conf.WORKSPACE_DIRNAME}/readme.md`)
+            _g.destinationPath(path.join(_conf.WORKSPACE_DIRNAME, 'readme.md'))
         ),
         packageJson: () => {
             let settings = _g.config.getAll();
 
             _g.fs.write( 
-                _g.destinationPath(`${_conf.WORKSPACE_DIRNAME}/package.json`),
+                _g.destinationPath(path.join(_conf.WORKSPACE_DIRNAME,'package.json')),
                 JSON.stringify(settings.packageJson)
                     .replace(/{/g, '{\n')
                     .replace(/\[/g, '[\n')

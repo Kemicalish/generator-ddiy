@@ -27,9 +27,9 @@ describe('webpack', () => {
 
   it('creates expected bundler files', () => {
     assert.file([
-        `${_settings.WORKSPACE_DIRNAME}${pluginOptions.BUNDLER_FILNAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.BUNDLER_DIRNAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`
+        path.join(_settings.WORKSPACE_DIRNAME, pluginOptions.BUNDLER_FILNAME),
+        path.join(_settings.WORKSPACE_DIRNAME, _settings.BUNDLER_DIRNAME),
+        path.join(_settings.WORKSPACE_DIRNAME, _settings.BUNDLER_DIRNAME, pluginOptions.BUNDLER_CONFIG_FILE)
     ]);
   });
 });

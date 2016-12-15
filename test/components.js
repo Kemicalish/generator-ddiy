@@ -11,10 +11,10 @@ const pluginOptions = {
 };
 const core = require('../generators/core.js');
 let _settings = core.getSettings(pluginOptions);
-
-const jsFilePath = `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/components/${testCompName}.js`;
-const sccsFilePath = `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.STYLES_DIRNAME}/components/_${testCompName}.scss`;
-const hbsFilePath = `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.TEMPLATES_DIRNAME}/components/${testCompName}.hbs`;
+const appDirPath = path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME);
+const jsFilePath = path.join(appDirPath, _settings.SCRIPTS_DIRNAME, 'components', `${testCompName}.js`);
+const sccsFilePath = path.join(appDirPath, _settings.STYLES_DIRNAME, 'components', `_${testCompName}.scss`);
+const hbsFilePath = path.join(appDirPath, _settings.TEMPLATES_DIRNAME, 'components', `${testCompName}.hbs`);
 
 let _essentialVars = ['init', 'renderIn'];
 

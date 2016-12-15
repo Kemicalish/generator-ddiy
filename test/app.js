@@ -25,7 +25,7 @@ describe('app', () => {
 
   it('creates package.json file', () => {
     assert.file([
-        `${_settings.WORKSPACE_DIRNAME}package.json`
+        path.join(_settings.WORKSPACE_DIRNAME, 'package.json')
     ]);
   });
 

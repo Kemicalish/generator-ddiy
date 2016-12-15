@@ -2,7 +2,7 @@
  const commons = {
      GENERATOR_NAME        : 'ddiy',
      CORE_DIRNAME          : 'core',
-     WORKSPACE_DIRNAME     : 'work/', //if WORKSPACE is not at root, add an ending slash. Ex: work/
+     WORKSPACE_DIRNAME     : './work', //if WORKSPACE is not at root, add an ending slash. Ex: work/
      
      APP_DIRNAME           : 'app',
      BUNDLER_DIRNAME       : 'bundler',

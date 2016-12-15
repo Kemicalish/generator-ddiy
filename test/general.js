@@ -7,7 +7,8 @@ const pluginOptions = {
 };
 const core = require('../generators/core.js');
 let _settings = core.getSettings(pluginOptions);
-
+const appDirPath = path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME);
+const scriptsDirPath = path.join(appDirPath, _settings.SCRIPTS_DIRNAME);
 describe('general', () => {
   before(function (done) {
     helpers.run(path.join(__dirname, scopeDir))
@@ -24,16 +25,14 @@ describe('general', () => {
 
   it('creates expected app files', () => {
     assert.file([
-        `${_settings.WORKSPACE_DIRNAME}.gitignore`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.CORE_DIRNAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.CORE_DIRNAME}/device.js`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.CORE_DIRNAME}/router.js`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/constants.js`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/${_settings.JS_ENTRY_FILENAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/${_settings.STYLES_DIRNAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.APP_DIRNAME}/index.html`,
+        path.join(_settings.WORKSPACE_DIRNAME, '.gitignore'),
+        appDirPath,
+        path.join(appDirPath, 'index.html'),
+        path.join(scriptsDirPath, _settings.CORE_DIRNAME),
+        path.join(scriptsDirPath, _settings.CORE_DIRNAME, 'device.js'),
+        path.join(scriptsDirPath, _settings.CORE_DIRNAME, 'router.js'),
+        path.join(scriptsDirPath, 'constants.js'),
+        path.join(scriptsDirPath, _settings.JS_ENTRY_FILENAME)
     ]);
   });
 });

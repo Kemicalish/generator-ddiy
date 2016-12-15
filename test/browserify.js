@@ -9,7 +9,7 @@ const pluginOptions = {
 
 const core = require('../generators/core.js');
 let _settings = core.getSettings(pluginOptions);
-
+const taskDirPath = path.join(_settings.WORKSPACE_DIRNAME, _settings.TASK_DIRNAME);
 const mainTaskFilename = 'browserify-main.js';
 const scriptsTaskFilename = 'browserify-scripts.js';
 const stylesTaskFilename = 'browserify-styles.js';
@@ -30,12 +30,13 @@ describe('browserify', () => {
   });
 
   it('creates expected tasks files', () => {
+    
     assert.file([
-        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${mainTaskFilename}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${scriptsTaskFilename}`,
-        `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${stylesTaskFilename}`,
+        taskDirPath,
+        path.join(taskDirPath, pluginOptions.BUNDLER_CONFIG_FILE),
+        path.join(taskDirPath, mainTaskFilename),
+        path.join(taskDirPath, scriptsTaskFilename),
+        path.join(taskDirPath, stylesTaskFilename)
     ]);
   });
 
@@ -49,7 +50,7 @@ describe('browserify', () => {
         'fonts',
         'build'
         ].forEach((task) => {
-        assert.fileContent(`${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${mainTaskFilename}`, 
+        assert.fileContent(path.join(taskDirPath, mainTaskFilename), 
             'gulp.task(\'' + task);
         });
     });
@@ -58,7 +59,7 @@ describe('browserify', () => {
         [
         'scripts'
         ].forEach((task) => {
-        assert.fileContent(`${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${scriptsTaskFilename}`, 
+        assert.fileContent(path.join(taskDirPath, scriptsTaskFilename), 
             'gulp.task(\'' + task);
         });
     });
@@ -67,7 +68,7 @@ describe('browserify', () => {
         [
         'styles'
         ].forEach((task) => {
-        assert.fileContent(`${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${stylesTaskFilename}`, 
+        assert.fileContent(path.join(taskDirPath, stylesTaskFilename), 
             'gulp.task(\'' + task);
         });
     });
@@ -76,7 +77,7 @@ describe('browserify', () => {
         mainTaskFilename,
         scriptsTaskFilename,
         stylesTaskFilename
-    ].map(filename => `${_settings.WORKSPACE_DIRNAME}${_settings.TASK_DIRNAME}/${filename}`)
+    ].map(filename => path.join(taskDirPath, filename))
     .forEach((file) => {
          it(`${file} should require ${pluginOptions.BUNDLER_CONFIG_FILE}`, () => {
              assert.fileContent(`${file}`, 

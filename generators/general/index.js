@@ -35,20 +35,20 @@ module.exports = generators.Base.extend({
             _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME))
         ),
         constants: () => _g.fs.copyTpl(
-            _g.templatePath(`${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/constants.js`),
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.APP_DIRNAME}/${_settings.SCRIPTS_DIRNAME}/constants.js`),
+            _g.templatePath(path.join(_settings.APP_DIRNAME, _settings.SCRIPTS_DIRNAME, 'constants.js')),
+            _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME, _settings.SCRIPTS_DIRNAME, 'constants.js')),
             _settings
         ),
         indexHTML: () => _g.fs.copyTpl(
-            _g.templatePath(`${_settings.APP_DIRNAME}/index.html`),
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.APP_DIRNAME}/index.html`),
+            _g.templatePath(path.join(_settings.APP_DIRNAME, 'index.html')),
+            _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME, 'index.html')),
             _settings
         ),
         gitignore: () => _g.fs.write(
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/.gitignore`),
+            _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, '.gitignore')),
             _settings.ignoreFiles.join("\n")
         ),
-        templatesDir: () => mkdirp(_g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.APP_DIRNAME}/${_settings.TEMPLATES_DIRNAME}`), function (err) {
+        templatesDir: () => mkdirp(_g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME, _settings.TEMPLATES_DIRNAME)), function (err) {
 
         })
     }
