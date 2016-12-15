@@ -1,5 +1,6 @@
 'use strict';
 const generators = require('yeoman-generator');
+const path = require('path');
 const core = require('../core.js');
 const packageJson = require('./package-json-base.js');
 const pluginOptions = {
@@ -35,19 +36,15 @@ module.exports = generators.Base.extend({
             return;
         }
 
-        _g.fs.copy(
-            _g.templatePath(`${pluginOptions.BUNDLER_DIRNAME}/**/*`),
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.BUNDLER_DIRNAME}`)
-        );
         _g.fs.copyTpl(
-            _g.templatePath(`${pluginOptions.BUNDLER_FILNAME}`),
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${pluginOptions.BUNDLER_FILNAME}`),
+            _g.templatePath(path.join(pluginOptions.BUNDLER_FILNAME)),
+            _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, pluginOptions.BUNDLER_FILNAME)),
             _settings
         );
 
         _g.fs.copyTpl(
-            _g.templatePath(`${pluginOptions.BUNDLER_CONFIG_FILE}`),
-            _g.destinationPath(`${_settings.WORKSPACE_DIRNAME}/${_settings.BUNDLER_DIRNAME}/${pluginOptions.BUNDLER_CONFIG_FILE}`),
+            _g.templatePath(path.join(pluginOptions.BUNDLER_CONFIG_FILE)),
+            _g.destinationPath(path.join(_settings.WORKSPACE_DIRNAME, _settings.BUNDLER_DIRNAME, pluginOptions.BUNDLER_CONFIG_FILE)),
             _settings
         );
     },

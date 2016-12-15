@@ -49,8 +49,20 @@ module.exports = generators.Base.extend({
             _g.templatePath('readme.md'),
             _g.destinationPath(path.join(_conf.WORKSPACE_DIRNAME, 'readme.md'))
         ),
+        mainJs: () => {
+            const settings = _g.config.getAll();
+            const requires = settings['mainRequireJs'] || {};
+            _g.fs.write( 
+                _g.destinationPath(path.join(_conf.WORKSPACE_DIRNAME, _conf.APP_DIRNAME, _conf.SCRIPTS_DIRNAME , _conf.JS_ENTRY_FILENAME)),
+                _.chain(requires)
+                    .toPairs()
+                    .map(r => `const ${r[0]} = require('${r[1]}')\n`)
+                    .join('')
+                    .value()
+            );
+        },
         packageJson: () => {
-            let settings = _g.config.getAll();
+            const settings = _g.config.getAll();
 
             _g.fs.write( 
                 _g.destinationPath(path.join(_conf.WORKSPACE_DIRNAME,'package.json')),

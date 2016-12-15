@@ -1,10 +1,13 @@
 'use strict';
+const fs = require('fs');
+const path = require('path');
 const _ = require('lodash');
 const conf = require('./conf.js');
 const BUNDLER_CONFIG_KEY = 'BUNDLER';
 const TASK_RUNNER_CONFIG_KEY = 'TASK_RUNNER';
 const VIEW_ENGINE_CONFIG_KEY = 'VIEW_ENGINE';
 const STATE_CONTAINER_CONFIG_KEY = 'STATE_CONTAINER';
+
 
 function DdiyException(value, message) {
     this.value = value;
@@ -45,6 +48,15 @@ const copylogo = (generator, conf, name, options) => {
             options.LOGO_PATH,
             generator.destinationPath(`${conf.WORKSPACE_DIRNAME}/${conf.APP_DIRNAME}/images/demo/${name}-logo.png`)
     );
+}
+
+const addMainRequireJs = (generator, options) => {
+    const requireFile = path.join(generator.templatePath('..'), 'main-require.js');
+    if (fs.existsSync(requireFile)) {
+        const currentRequire = require(requireFile);
+        const requires = generator.config.get('mainRequireJs') || {};
+        generator.config.set('mainRequireJs', _.merge({}, requires, currentRequire ));
+    }
 }
 
 const getModuleWriting = (configKey) => {
@@ -92,6 +104,8 @@ const getModuleConfig = (configKey) => {
         generator.log(`${configKey.toUpperCase()}  => ${name} CONFIG`);
         generator.config.set(configKey, name);
         generator.config.set(`${configKey}_OPTIONS`, options);
+        addMainRequireJs(generator, options);
+
         generator.config.save();
         settings = generator.config.getAll();
 
@@ -116,6 +130,7 @@ const StateContainer = createModule(STATE_CONTAINER_CONFIG_KEY);
 
 
 module.exports = {
+    addMainRequireJs,
     getSettings,
     getModuleName,
     DdiyException,
