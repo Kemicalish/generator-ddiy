@@ -80,7 +80,8 @@ const getModuleConfig = (configKey) => {
         let name = options.NAME;
 
         let settings = generator.config.getAll();
-        let current = generator.config.get(configKey);
+        generator.log(settings);
+        let current = settings.prompt[configKey];
         generator.log(`${configKey.toUpperCase()}  => ${name} START [CHOSEN: ${current}]`);
 
         if (current === null || typeof (current) === 'undefined') {
