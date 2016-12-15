@@ -42,11 +42,4 @@ describe('prompter', () => {
             `"${tool[0]}": "${tool[1]}"`);
         });
     });
-
-  it(`${yoRcFile} should contain these settings`, () => {
-        tools.forEach((tool) => {
-        assert.fileContent(yoRcFile, 
-            `"${tool[0]}": "${tool[1]}"`);
-        });
-    });
 });
