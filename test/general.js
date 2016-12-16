@@ -29,10 +29,8 @@ describe('general', () => {
         appDirPath,
         path.join(appDirPath, 'index.html'),
         path.join(scriptsDirPath, _settings.CORE_DIRNAME),
-        path.join(scriptsDirPath, _settings.CORE_DIRNAME, 'device.js'),
         path.join(scriptsDirPath, _settings.CORE_DIRNAME, 'router.js'),
-        path.join(scriptsDirPath, 'constants.js'),
-        path.join(scriptsDirPath, _settings.JS_ENTRY_FILENAME)
+        path.join(scriptsDirPath, 'constants.js')
     ]);
   });
 });

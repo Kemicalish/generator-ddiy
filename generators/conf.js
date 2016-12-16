@@ -17,6 +17,7 @@
      PROD_DIRNAME          : 'prod',
 
      JS_ENTRY_FILENAME     : 'main.js',
+     CSS_ENTRY_FILENAME    : 'main.scss',
      COMPONENT_DIRNAME     : 'components',
 }
 

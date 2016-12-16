@@ -29,5 +29,17 @@ describe('app', () => {
     ]);
   });
 
+  it(`creates JS entry file: ${_settings.JS_ENTRY_FILENAME}`, () => {
+    assert.file([
+        path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME, _settings.SCRIPTS_DIRNAME, _settings.JS_ENTRY_FILENAME)
+    ]);
+  });
+
+  it(`creates CSS entry file: ${_settings.CSS_ENTRY_FILENAME}`, () => {
+    assert.file([
+        path.join(_settings.WORKSPACE_DIRNAME, _settings.APP_DIRNAME, _settings.STYLES_DIRNAME, _settings.CSS_ENTRY_FILENAME)
+    ]);
+  });
+
 });
 

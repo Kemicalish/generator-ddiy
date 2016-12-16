@@ -18,6 +18,17 @@ const createCompose = generator => gData => {
     });
 }
 
+const getJsEntry = requires => _.chain(requires)
+                    .toPairs()
+                    .map(r => `const ${r[0]} = require('${r[1]}');\n`)
+                    .join('')
+                    .value();
+
+const getCssEntry = requires => _.chain(requires)
+                    .map(r => `@import '${r}';\n`)
+                    .join('')
+                    .value();
+
 module.exports = generators.Base.extend({
     // The name `constructor` is important here
     constructor: function () {
@@ -54,11 +65,15 @@ module.exports = generators.Base.extend({
             const requires = settings['mainRequireJs'] || {};
             _g.fs.write( 
                 _g.destinationPath(path.join(_conf.WORKSPACE_DIRNAME, _conf.APP_DIRNAME, _conf.SCRIPTS_DIRNAME , _conf.JS_ENTRY_FILENAME)),
-                _.chain(requires)
-                    .toPairs()
-                    .map(r => `const ${r[0]} = require('${r[1]}')\n`)
-                    .join('')
-                    .value()
+                getJsEntry(requires)
+            );
+        },
+        mainCss: () => {
+            const settings = _g.config.getAll();
+            const requires = settings['mainRequireCss'] || {};
+            _g.fs.write( 
+                _g.destinationPath(path.join(_conf.WORKSPACE_DIRNAME, _conf.APP_DIRNAME, _conf.STYLES_DIRNAME , _conf.CSS_ENTRY_FILENAME)),
+                getCssEntry(requires)
             );
         },
         packageJson: () => {

@@ -24,7 +24,7 @@ module.exports = generators.Base.extend({
     configuring : {
        writeConfig:() => {
            _settings = core.getSettings(pluginOptions, _g);
-           core.addMainRequireJs(_g, pluginOptions);
+           core.addMainRequire(_g, pluginOptions);
        }
     },
     writing: {

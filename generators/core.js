@@ -50,12 +50,14 @@ const copylogo = (generator, conf, name, options) => {
     );
 }
 
-const addMainRequireJs = (generator, options) => {
+const addMainRequire = (generator, options) => {
     const requireFile = path.join(generator.templatePath('..'), 'main-require.js');
     if (fs.existsSync(requireFile)) {
         const currentRequire = require(requireFile);
-        const requires = generator.config.get('mainRequireJs') || {};
-        generator.config.set('mainRequireJs', _.merge({}, requires, currentRequire ));
+        const requiresJs = generator.config.get('mainRequireJs') || {};
+        const requiresCss = generator.config.get('mainRequireCss') || [];
+        generator.config.set('mainRequireJs', _.merge({}, requiresJs, currentRequire.js || {} ));
+        generator.config.set('mainRequireCss', _.concat(requiresCss , currentRequire.css || [] ));
     }
 }
 
@@ -104,7 +106,7 @@ const getModuleConfig = (configKey) => {
         generator.log(`${configKey.toUpperCase()}  => ${name} CONFIG`);
         generator.config.set(configKey, name);
         generator.config.set(`${configKey}_OPTIONS`, options);
-        addMainRequireJs(generator, options);
+        addMainRequire(generator, options);
 
         generator.config.save();
         settings = generator.config.getAll();
@@ -130,7 +132,7 @@ const StateContainer = createModule(STATE_CONTAINER_CONFIG_KEY);
 
 
 module.exports = {
-    addMainRequireJs,
+    addMainRequire,
     getSettings,
     getModuleName,
     DdiyException,
