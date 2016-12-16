@@ -1,6 +1,7 @@
 'use strict';
 require('babel-polyfill');
 const _ = require('lodash');
+const fs = require('fs');
 const path = require('path');
 const generators = require('yeoman-generator');
 const _conf = require('../conf.js');
@@ -39,6 +40,9 @@ module.exports = generators.Base.extend({
 
     initializing: function () {
         _g = this;
+        fs.unlink(path.join(_g.destinationPath('.yo-rc.json')));
+        _g.config.save();
+
         this.pkg = require('../../package.json');
         _g.log('START INIT');
         _.each(generatorEnabled, createCompose(_g));
