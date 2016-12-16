@@ -1,3 +1,19 @@
+/**
+GLOBALS
+**/
+
+body{
+	background:$color-bg-default;
+	margin:0;
+	padding:0;
+	font-family: $font-default;
+	color:$color-txt-default;
+}
+
+*{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 .stack-list
 {
     width:100%;

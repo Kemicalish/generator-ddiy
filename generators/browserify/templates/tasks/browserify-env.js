@@ -12,7 +12,8 @@ var paths = {
             fonts:'<%= APP_DIRNAME %>/fonts/**/*',
             templates:'<%= APP_DIRNAME %>/templates/**/*.hbs',
             html: '<%= APP_DIRNAME %>/*.html', 
-            css: '<%= APP_DIRNAME %>/styles/*.scss' 
+            css: '<%= APP_DIRNAME %>/styles/*.scss',
+            jsFilename:'<%= JS_ENTRY_FILENAME %>'
         }, 
         dest: { 
             js: '<%= DEV_DIRNAME %>/<%= SCRIPTS_DIRNAME %>', 
@@ -20,6 +21,7 @@ var paths = {
             html: '<%= DEV_DIRNAME %>/', 
             css: '<%= DEV_DIRNAME %>/styles',
             images:'<%= DEV_DIRNAME %>/images',
+            jsFilename:'bundle.js'
         } 
     },
     development: {
@@ -46,7 +48,7 @@ var paths = {
 
 var constants = {
     default: {
-        jsFilename: 'bundle.js',
+        appName: '<%= prompt.appName %>',
     },
     development: {
     },

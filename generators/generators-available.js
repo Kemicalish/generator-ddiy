@@ -11,8 +11,13 @@ module.exports = [
         type:generatorTypes.CORE
     },
     {
-        id:'components',
+        id:'devices',
         requires:[],
+        type:generatorTypes.CORE
+    },
+    {
+        id:'components',
+        requires:['handlebars'],
         type:generatorTypes.PLUGIN
     },
     {

@@ -17,7 +17,7 @@ gulp.task('scripts', () => {
 
  var transforms = [
         ['babelify', {presets: ['es2015']}],
-       'hbsfy',
+       //'hbsfy', //TODO: check if VIEW_ENGINE === 'handlebars'
        'require-globify'];
 
   if(conf.plugin.js.browserify.transform.stripify) transforms.push('stripify');
@@ -29,7 +29,7 @@ gulp.task('scripts', () => {
   });
 
   return b.bundle()
-     .pipe(source(conf.constants.jsFilename))
+     .pipe(source(conf.paths.dest.jsFilename))
      .pipe($.plumber())
      .pipe(buffer())
      .pipe($.sourcemaps.init({loadMaps: true}))

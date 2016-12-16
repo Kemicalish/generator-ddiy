@@ -8,5 +8,6 @@ module.exports = _.filter(generatorsAvailable, g => g.type === generatorTypes.CO
         'webpack',
         'handlebars',
         'react',
-        'redux'
+        'redux' 
+        //add other enabled generators here
     ], enabled => enabled === g.id))

@@ -8,6 +8,7 @@ const conf = require('./browserify-env.js');
 
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src(conf.paths.src.html)
+     .pipe($.replace(new RegExp(conf.paths.src.jsFilename,'g'), conf.paths.dest.jsFilename)) //TODO convert to conf.paths.src / dest
     .pipe(gulp.dest(conf.paths.dest.html));
 });
 

@@ -1,8 +1,13 @@
 module.exports = {
-    'babelPolyfill':'babel-polyfill',
-    '_':'lodash',
-    '$':'jquery',
-    'constants':'./constants',
-    'device': './core/device',
-    'router':'./core/router'
+    js:{
+        'babelPolyfill':'babel-polyfill',
+        '_':'lodash',
+        '$':'jquery',
+        'constants':'./constants',
+        'router':'./core/router'
+    },
+    css:[
+        'vars',
+        'demo'
+    ]
 }

@@ -3,6 +3,7 @@ module.exports = {
         "babelify": "^7.3.0",
         "browser-sync": "^2.2.1",
         "browserify": "^13.0.1",
+        "gulp-replace": "^0.5.4",
         "gulp-autoprefixer": "^3.0.1",
         "gulp-babel": "^6.1.1",
         "gulp-browserify": "^0.5.1",
@@ -21,8 +22,7 @@ module.exports = {
         "require-globify": "^1.3.0",
         "stripify": "^6.0.0",
         "vinyl-buffer": "^1.0.0",
-        "vinyl-source-stream": "^1.1.0",
-        "hbsfy": "^2.7.0",
+        "vinyl-source-stream": "^1.1.0"
     },
     'dependencies': {
 

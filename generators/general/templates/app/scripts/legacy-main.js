@@ -22,10 +22,11 @@ function displayHome(){
 //require('!style-loader!css-loader!sass-loader!../styles/main.scss');
 
 //TODO:SHould be refactored once other TODOs are done
-$(document).ready(function(){
+/*$(document).ready(function(){
 	device.init()
 		.then(router.init)
 		//.then(Do your init stuff)
 		.then(entry => router.trigger(window.location.pathname.substring(1)))
 });
 
+*/

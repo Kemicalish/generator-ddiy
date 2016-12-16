@@ -40,7 +40,10 @@ module.exports = generators.Base.extend({
 
     initializing: function () {
         _g = this;
-        fs.unlink(path.join(_g.destinationPath('.yo-rc.json')));
+        const yoRcJsonPath = path.join(_g.destinationPath('.yo-rc.json'));
+        if (fs.existsSync(yoRcJsonPath)) {
+            fs.unlink(yoRcJsonPath);
+        }
         _g.config.save();
 
         this.pkg = require('../../package.json');
