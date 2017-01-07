@@ -104,8 +104,16 @@ const getModuleConfig = (configKey) => {
         }
 
         generator.log(`${configKey.toUpperCase()}  => ${name} CONFIG`);
-        generator.config.set(configKey, name);
-        generator.config.set(`${configKey}_OPTIONS`, options);
+        const stack = generator.config.get('STACK') || {};
+         generator.config.set('STACK',
+            _.merge({}, 
+            stack, 
+            _.fromPairs([
+                [configKey, name],
+                [`${configKey}_OPTIONS`, options]
+            ]))
+        );
+
         addMainRequire(generator, options);
 
         generator.config.save();
