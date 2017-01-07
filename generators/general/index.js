@@ -23,8 +23,10 @@ module.exports = generators.Base.extend({
     },
     configuring : {
        writeConfig:() => {
+           _g.log('############# GENERAL CONFIG WRITE!');
            _settings = core.getSettings(pluginOptions, _g);
            core.addMainRequire(_g, pluginOptions);
+           _g.log((_g.config.getAll()).mainRequireCss);
        }
     },
     writing: {

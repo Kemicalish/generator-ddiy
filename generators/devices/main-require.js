@@ -1,6 +1,6 @@
 module.exports = {
     js:{
-        'devices':'./devices',
+        'devices':'./core/devices',
     },
     css:[
 
