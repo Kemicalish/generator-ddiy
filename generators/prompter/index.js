@@ -28,7 +28,7 @@ const choices = _.chain(generatorsEnabled)
         name: c.type,
         message: `Which ${c.typeLabel} ?`,
         choices: toChoices(_.concat([noneChoice], c.choices)),
-        default: 'none',
+        default: noneChoice[0],
         store: true
     }})
     .value()
