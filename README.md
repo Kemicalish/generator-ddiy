@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Kemicalish/generator-ddiy.svg?branch=master)](https://travis-ci.org/Kemicalish/generator-ddiy)
+[![Coverage Status](https://coveralls.io/repos/github/Kemicalish/generator-ddiy/badge.svg?branch=master)](https://coveralls.io/github/Kemicalish/generator-ddiy?branch=master)
 
 # Don't do it Yourself
 > Frontend Stack Generator
