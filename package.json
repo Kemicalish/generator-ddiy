@@ -1,6 +1,6 @@
 {
   "name": "generator-ddiy",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "DDIY - Don't Do It Yourself is a Yeoman generator for SPA",
   "main": "index.js",
   "engines": {
@@ -23,16 +23,11 @@
   "license": "MIT",
   "homepage": "https://github.com/Kemicalish/generator-ddiy",
   "files": [
-    "generators/conf.js",
-    "generators/app",
-    "generators/prompter",
-    "generators/general",
-    "generators/webpack",
-    "generators/gulp",
-    "generators/browserify",
-    "generators/handlebars",
-    "generators/react",
-    "generators/components"
+    "generators",
+    "test",
+    ".babelrc",
+    ".eslintrc",
+    ".nycrc"
   ],
   "peerDependencies": {
     "yo": ">=1.7.1"
