@@ -1,3 +1,5 @@
 node_modules
 work
+coverage
 .yo-rc.json
+.nyc_output
