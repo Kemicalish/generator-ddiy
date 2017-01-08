@@ -1,6 +1,6 @@
 {
   "name": "generator-ddiy",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "DDIY - Don't Do It Yourself is a Yeoman generator for SPA",
   "main": "index.js",
   "engines": {

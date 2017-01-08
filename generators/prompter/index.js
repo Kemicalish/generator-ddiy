@@ -89,7 +89,7 @@ module.exports = generators.Base.extend({
 
                 //TODO: move elsewhere
                 let stack = choices
-                    .map(c => [c.typeLabel, stackHtml(answers[c.name], c.choices)]);
+                    .map(c => [c.name, stackHtml(answers[c.name], c.choices)]);
 
                 //TODO: refactor this within core.Bundler 
                 _promptAnswers.stylesheet = answers.BUNDLER === 'browserify' ? '<link rel="stylesheet" href="./styles/main.css">' : '';
