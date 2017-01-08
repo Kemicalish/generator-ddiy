@@ -35,7 +35,8 @@ const getModuleName = dirname => dirname.split('\\').slice(-1)[0];
 const getIsSelected = (configKey) => {
     return (generator, name) => {
         let settings = generator.config.getAll();
-        return settings[configKey] === name;
+        generator.log(`${settings.STACK[configKey]}  === ${name} ???`)
+        return settings.STACK[configKey] === name;
     }
 }
 
