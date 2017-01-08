@@ -55,4 +55,4 @@ module.exports = [
         requires:['react'],
         type:generatorTypes.STATE_CONTAINER
     }
-]
+];

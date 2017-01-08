@@ -10,4 +10,4 @@ module.exports = _.filter(generatorsAvailable, g => g.type === generatorTypes.CO
         'react',
         'redux' 
         //add other enabled generators here
-    ], enabled => enabled === g.id))
+    ], enabled => enabled === g.id));

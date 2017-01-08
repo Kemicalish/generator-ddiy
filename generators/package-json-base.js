@@ -41,4 +41,4 @@ module.exports = {
     "image-preloader": "^1.1.1",
     "font-awesome": "^4.6.3"
   }
-}
+};
